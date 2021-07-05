@@ -2,7 +2,7 @@
 ## Projects and exercises for the FAC programme
 ### Pre-Apprenticeship 1
 [Semantic HTML workshop](https://learn.foundersandcoders.com/course/syllabus/pre-apprenticeship-1/schedule/#html) <br />
-My semantic HTML page (link it here?)
+[My semantic HTML page](/pre-apprenticeship1/challenge.html)<br />
 
 [A11y workshop](https://learn.foundersandcoders.com/course/syllabus/pre-apprenticeship-1/schedule/#a11y) <br />
 My accessibility corrections (need to "publish" it)
