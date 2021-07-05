@@ -19,14 +19,22 @@ Create a page for it and publish it.
 
 [Optional homework](https://learn.foundersandcoders.com/course/syllabus/pre-apprenticeship-1/schedule/#optional-homework) <br />
 If there is any time.
+
+Task list
+
+- [ ] Semantic html
+- [x] A11y correction exercise
+- [ ] All the other things
 ---
 
 ### Pre-Apprenticeship 2
 [CSS Layouts](https://learn.foundersandcoders.com/course/syllabus/pre-apprenticeship-2/schedule/#css-layouts) <br />
 My coursework for the layouts workshop
+
 ---
 
 ### Pre-course 3
 [JS](https://learn.foundersandcoders.com/course/syllabus/precourse-3/schedule/#js) <br />
+
 ---
 
