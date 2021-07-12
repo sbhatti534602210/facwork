@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HTML5 Canvas</title>
+</head>
+<body>
+<canvas id="draw" width="800" height="800"></canvas>
+<script>
+  const canvas = document.querySelector('#draw');
+  const ctx = canvas.getContext('2d');
+  //size so it's the same size as the width of the windo
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  ctx.strokeStyle = '#BADA55';;
+  ctx.lineJoin = 'round';
+  ctx.lineCap = 'round';
+
+  ctx.lineWidth = 100;
+  //blends into each other
+  ctx.globalCompositeOperation = 'multiply';
+
+  let isDrawing = false;
+
+  //where do you start the line and where it finishes
+  let lastX = 0;
+  let lastY = 0;
+
+  // have a look at https://mothereffinghsl.com/
+  let hue = 0;
+  let direction = true;
+  
+  function draw(e) {
+    // want it only when the person clicks down
+    if(!isDrawing) return; 
+    // stop the function from running when the mouse is not clicked down
+    console.log(e);
+    ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+  
+
+    //modify the line width too (as well as the hue)
+    // ctx.lineWidth = hue;
+    //modify and move it to below.
+
+    // start a path which is ctx - that's where the drawing is
+    ctx.beginPath();
+    // always starts from 0 and goes to whereever the mouse goes
+    ctx.moveTo(lastX, lastY);
+    ctx.lineTo(e.offsetX, e.offsetY);
+    ctx.stroke();
+
+    // lastX = e.offsetX;
+    // lastY = e.offsetY;
+    //or can simplify in one line using array destructuring
+    [lastX, lastY] = [e.offsetX, e.offsetY];
+
+    // increment the hue
+    hue++;
+    if (hue >= 360) {
+      hue =0; // reset if goes over 360
+    }
+
+    // don't want line width to get too big. if it's greater than 100 then change the direction, i.e. get smaller. if it's smaller than one, then change direction.
+    if (ctx.lineWidth >= 100 || ctx.lineWidth <= 1) {
+      direction = !direction;
+    }
+    if (direction) {
+      ctx.lineWidth++;
+    }
+    else {
+      ctx.lineWidth--;
+    }
+  }
+
+
+canvas.addEventListener('mousemove', draw);
+
+// when the mouse is down
+// canvas.addEventListener('mousedown', () => isDrawing = true);
+// modify it and add the event e
+canvas.addEventListener('mousedown', (e) => {
+  isDrawing = true;
+  // need to update the last point - when the mouse comes up, i.e. finish the line
+  [lastX, lastY] = [e.offsetX, e.offsetY];
+});
+
+canvas.addEventListener('mouseip', () => isDrawing = false);
+canvas.addEventListener('mouseout', () => isDrawing = false);
+
+
+</script>
+
+<style>
+  html, body {
+    margin: 0;
+  }
+</style>
+
+</body>
+</html>
