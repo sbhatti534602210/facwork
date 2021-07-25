@@ -1,41 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FACwork</title>
-    <link href="css/mainstyle.css" rel="stylesheet">
-</head>
-<body>
-   <header class="center">
-       <h1>Coursework for FAC programme</h1>
-   </header> 
-   <section class="center">
-       <div>
-           <p>This site/repository is for sharing my learning as I am working through the Founders and Coders programme.<br />
-            More about the programme is available on the website, <a href="https://www.foundersandcoders.com/">www.foundersandcoders.com/</a>.</p>
-       </div>
-       <h2>Workshop exercises</h2>
-       <p><a href="preapprenticeship1/challenge.html">Semantic HTML</a></p>
-       <p><a href="preapprenticeship1/a11y.html">Accessibility</a></p>
-       <p><a href="preapprenticeship1/arraymethods.html">For loop</a></p>
+    <link href="css/mainstyle.css" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="/media/workspace.png" />
+    <script
+      src="https://kit.fontawesome.com/f9ad104398.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <header class="headercontainer">
+      <h1>Coursework for FAC programme</h1>
+      <nav>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#exercises">Exercises</a></li>
 
-       <p>CSS Layouts:<br /> 
-        <a href="preapprenticeship2/challenge1.html">Challenge 1</a> <br />
-        <a href="preapprenticeship2/challenge2.html">Challenge 2</a> <br />
-        <a href="preapprenticeship2/challenge3.html">Challenge 3</a> <br />
-        <a href="preapprenticeship2/challenge4.html">Challenge 4</a>
-    </p>
-       <!-- <p><a href="preapprenticeship2/challenge2.html">CSS Grid</a></p> -->
+          <li><a href="/projects/projectsgallery.html">Projects</a></li>
+          <li><a href="/sb-challenges/forloop.html">Challenges</a></li>
+          <li><a href="/javascript30/js30exercises.html">JavaScript30</a></li>
+        </ul>
+      </nav>
+    </header>
+    <!-- <div class="maincontainer"> -->
+    <section class="center">
+      <p>
+        This site/repository is for sharing my learning as I am working through
+        the Founders and Coders programme.<br />
+        More about the programme is available on the website,
+        <a href="https://www.foundersandcoders.com/"
+          >www.foundersandcoders.com/</a
+        >.
+      </p>
+      <section id="exercises">
+        <h2>Workshop exercises</h2>
+        <p>
+          Starting with the basics of semantic HTML, organising content on a
+          page and making sure it is accessibile.
+        </p>
+        <p><a href="workshops/challenge.html">Semantic HTML</a></p>
+        <p><a href="workshops/a11y.html">Accessibility</a></p>
 
-       <h2>JavaScript30</h2>
-       <p><a href="javascript30/js30exercises.html">my JavaScript30 projects</a></p>
+        <p>Working with CSS Layouts</p>
+        <p>
+          <a href="workshops/challenge1.html">Challenge 1</a> <br />
+          <a href="workshops/challenge2.html">Challenge 2</a> <br />
+          <a href="workshops/challenge3.html">Challenge 3</a> <br />
+          <a href="workshops/challenge4.html">Challenge 4</a>
+        </p>
+        <p>Learning more about the DOM and accessing and changing elements.</p>
+        <p><a href="workshops/domchallenge.html">DOM challenge</a></p>
+      </section>
 
-       <h2>Research challenges</h2>
-       <p>A collection of JavaScript challenges I have written</p>
-       <p><a href="sb-challenges/forloop.html">Array methods: for loop</a><br /></p>
-
-   </section>
-</body>
+      <section>
+        <h2>Workshop projects</h2>
+        <p>Group project: create an agency webpage</p>
+        <p>
+          <a href="https://fac22.github.io/Sunny_North_London_Agency/"
+            >Sunny North London Agency</a
+          >
+        </p>
+        <p><a href="projects/formpractice.html">Project practice</a></p>
+      </section>
+      <section>
+        <h2>Learning spikes</h2>
+        <p><a href="#">Learning spikes</a></p>
+      </section>
+      <section>
+        <h2>My own projects</h2>
+        <p><a href="projects/projectsgallery.html">Projects gallery</a></p>
+      </section>
+      <section>
+        <h2>Research challenges</h2>
+        <p>A collection of JavaScript challenges I have written</p>
+        <p>
+          <a href="sb-challenges/forloop.html">Array methods: for loop</a><br />
+        </p>
+      </section>
+      <section>
+        <h2>JavaScript30</h2>
+        <p>Following the Wes Bos JavaScript30 challenge</p>
+        <p>
+          <a href="javascript30/js30exercises.html"
+            >some of my JavaScript30 projects</a
+          >
+        </p>
+      </section>
+    </section>
+    <!-- </div> -->
+    <footer class="center">
+      <a href="https://twitter.com/codering2"
+        ><i class="fab fa-twitter"></i>@codering2</a
+      >
+    </footer>
+  </body>
 </html>

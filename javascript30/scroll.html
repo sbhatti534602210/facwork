@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Slide in scroll</title>
+</head>
+<body>
+
+  <div class="site-wrap">
+
+    <h1>Slide in on Scroll</h1>
+    <h2>Pluto Shits on the Universe</h2>
+    <p>by Fatimah Asghar</p>
+    <p>The text is from Fatimah's poem which I preferred to use instead of filler text. <br /><a href="https://www.poetryfoundation.org/poets/fatimah-asghar">More from the poet at the poetryfoundation website</a>.</p>
+    <p><em>On February 7, 1979, Pluto crossed over Neptune’s orbit and became the eighth planet from the sun for twenty years. A study in 1988 determined that Pluto’s path of orbit could never be accurately predicted. Labeled as “chaotic,” Pluto was later discredited from planet status in 2006.</em></p>
+    <p>Today, I broke your solar system. Oops. My bad. Your graph said I was supposed to make a nice little loop around the sun.</p>
+    <p>Naw.</p>
+    <p>I chaos like a motherfucker. Ain’t no one can chart me. All the other planets, they think I’m annoying. They think I’m an escaped moon, running free.</p>
+    <p>Fuck your moon. Fuck your solar system. Fuck your time. Your year? Your year ain’t
+      shit but a day to me. I could spend your whole year turning the winds in my bed. Thinking about rings and how Jupiter should just pussy on up and marry me by now. Your day?</p>
+    <p>That’s an asswipe. A sniffle. Your whole day
+      is barely the start of my sunset.</p>
+
+    <img src="nasa-rTZW4f02zY8-unsplash.jpg" alt="nebula photo" width="300" height="300" class="align-left slide-in">
+
+    <p>My name means hell, bitch. I am hell, bitch. All the cold
+      you have yet to feel. Chaos like a motherfucker.
+      And you tried to order me. Called me ninth.
+      Somewhere in the mess of graphs and math and compass
+      you tried to make me follow rules. Rules? Fuck your
+      rules. Neptune, that bitch slow. And I deserve all the sun
+      I can get, and all the blue-gold sky I want around me.</p>
+
+    <img src="neven-krcmarek-9dTg44Qhx1Q-unsplash.jpg" alt="moon photo" width="300" height="300" class="align-right slide-in">
+
+    <p> It is February 7th, 1979 and my skin is more
+      copper than any sky will ever be. More metal.
+      Neptune is bitch-sobbing in my rearview,
+      and I got my running shoes on and all this sky that’s all mine.</p>
+
+    <!-- <img src="adrian-swancar-pIr-PH5IXF8-unsplash.jpg" alt="red moon in the sky photo" width="200" height="500"class="align-left slide-in"> -->
+
+    <p>Fuck your order. Fuck your time. I realigned the cosmos.
+      I chaosed all the hell you have yet to feel. Now all your kids
+      in the classrooms, they confused.  <img src="orfeas-green-HFn0mFCQVhg-unsplash.jpg" alt="nightsky photo" width="200" height="200" class="align-right slide-in"> All their clocks:
+      wrong. They don’t even know what the fuck to do.
+      They gotta memorize new songs and shit. And the other
+      planets, I fucked their orbits. I shook the sky. Chaos like
+      a motherfucker.</p>
+
+    <p>It is February 7th, 1979. The sky is blue-gold:
+      the freedom of possibility.</p>
+
+    <!-- <img src="karan-bhatia-N1qnVoHNHXY-unsplash.jpg" alt="planets photo" width="300" height="300" class="align-right slide-in"> -->
+
+    <p>Today, I broke your solar system. Oops. My bad.</p>
+
+  </div>
+
+  <script>
+    //pass it a function, it will check the checkSlide function every 20ms
+    function debounce(func, wait = 20, immediate = true) {
+      var timeout;
+      return function() {
+        var context = this, args = arguments;
+        var later = function() {
+          timeout = null;
+          if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+      };
+    }
+
+    const sliderImages = document.querySelectorAll('.slide-in');
+
+    //create a function checkslide that checks slide
+    function checkSlide(e) {
+      // console.log(e);
+      // loop through every image and work out where the image should be shown
+      sliderImages.forEach(sliderImage => {
+        // gives pixel level where you are scrollY
+        //slideinAt is halfway through the image and imageBottom is at the bottomg.
+        const slideInAt = (window.scrollY + window.innerHeight) - sliderImage.height / 2;
+        // console.log(slideInAt);
+        const imageBottom = sliderImage.offsetTop + sliderImage.height;
+        const isHalfShown = slideInAt > sliderImage.offsetTop;
+        // make sure you haven't scrolled past it
+        const isNotScrolledPast = window.scrollY < imageBottom;
+        if (isHalfShown && isNotScrolledPast) {
+          sliderImage.classList.add('active');
+        } 
+        else {
+          sliderImage.classList.remove('active');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', debounce(checkSlide));
+
+  </script>
+
+  <style>
+    html {
+      box-sizing: border-box;
+      background: #ffc600;
+      font-family: 'helvetica neue';
+      font-size: 20px;
+      font-weight: 200;
+    }
+    
+    body {
+      margin: 0;
+    }
+    
+    *, *:before, *:after {
+      box-sizing: inherit;
+    }
+
+    h1 {
+      margin-top: 0;
+    }
+
+    .site-wrap {
+      max-width: 700px;
+      margin: 100px auto;
+      background: white;
+      padding: 40px;
+      text-align: justify;
+    }
+
+    .align-left {
+      float: left;
+      margin-right: 20px;
+    }
+
+    .align-right {
+      float: right;
+      margin-left: 20px;
+    }
+
+    .slide-in {
+      opacity: 0;
+      transition: all .5s;
+    }
+
+    .align-left.slide-in {
+      transform: translateX(-30%) scale(0.95);
+    }
+    
+    .align-right.slide-in {
+      transform: translateX(30%) scale(0.95);
+    }
+
+    .slide-in.active {
+      opacity: 1;
+      transform: translateX(0%) scale(1);
+    }
+
+  </style>
+
+</body>
+</html>

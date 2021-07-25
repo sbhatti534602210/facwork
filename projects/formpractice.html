@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pair project</title>
+    <link href="/css/mainstyle.css" rel="stylesheet" />
+    <script src="/js/script.js"></script>
+    <link rel="icon" type="image/png" href="/media/workspace.png" />
+    <script
+      src="https://kit.fontawesome.com/f9ad104398.js"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      input:not([type="checkbox"]):not([type="radio"]),
+      button,
+      textarea {
+        display: block;
+        font: inherit;
+        color: inherit;
+      }
+
+      textarea {
+        margin: 0.5rem 0;
+        padding: 0.5rem;
+      }
+
+      [aria-invalid="true"] {
+        box-shadow: 0 0 0 3px red;
+      }
+      [aria-invalid="false"] {
+        box-shadow: 0 0 0 3px green;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="headercontainer">
+      <h1>Practice creating form</h1>
+      <nav>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../index.html#exercises">Exercises</a></li>
+
+          <li><a href="/projects/projectsgallery.html">Projects</a></li>
+          <li><a href="/sb-challenges/forloop.html">Challenges</a></li>
+          <li><a href="/javascript30/js30exercises.html">JavaScript30</a></li>
+        </ul>
+      </nav>
+    </header>
+    <section class="center">
+      <p>As a potential client, I want to:</p>
+      <ul>
+        <li>
+          Input my name, email address and a description of the job to complete
+          (E1)
+        </li>
+        <li>
+          Input a short phrase, listed on the page, to verify I am not a robot
+          (E1)
+        </li>
+        <li>Be notified if my email address doesn’t look right (E2)</li>
+        <li>Be notified if the request I’m writing is too long (E2)</li>
+        <li>See my request on the page once I click a button (E3)</li>
+      </ul>
+      <div class="codebox">
+        <p class="code">New client form</p>
+        <form>
+          <label for="clientname">Client name</label>
+          <textarea id="clientname" name="clientname" rows="1" cols="50">
+Your name or company name</textarea
+          >
+
+          <label for="clientemail">Client email address</label>
+          <textarea id="clientemail" name="clientemail" rows="1" cols="50">
+Enter a valid email address</textarea
+          >
+
+          <label for="jd">Job description</label>
+          <textarea id="jd" name="jd" rows="5" cols="50">
+Enter a brief summary of the work you would like us to carry out.
+(Maximum length 300 characters.)</textarea
+          >
+          <button>Submit job request</button>
+        </form>
+      </div>
+    </section>
+    <footer class="center">
+      <a href="https://twitter.com/codering2"
+        ><i class="fab fa-twitter"></i>@codering2</a
+      >
+    </footer>
+  </body>
+</html>
