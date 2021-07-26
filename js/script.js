@@ -118,4 +118,4 @@ function generateWRDescription(wrArray) {
     });
     return ulelement; 
 }
-// usse style sheet to remove the bullets
+// use style sheet to remove the bullets
