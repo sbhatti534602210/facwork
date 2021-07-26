@@ -20,6 +20,13 @@ e.g. generateList(["hello", "world"]) -> <ul>
                                            <li>world</li>
                                           </ul>
 */
+const listBtn = document.querySelector("#generate-list");
+listBtn.onclick = () => {
+  const ul = generateList(["apple", "banana", "orange"]);
+  if (ul) {
+    listBtn.insertAdjacentElement("afterend", ul);
+  }
+};
 function generateList(array) {
   // your code here
   // console.log(array);
@@ -42,6 +49,13 @@ function generateList(array) {
 2. Count how many characters have been typed into it
 3. If it contains > 140 characters set the `aria-invalid="true"` attribute
 */
+document.querySelector("form").onsubmit = (event) => {
+  event.preventDefault();
+  validateTweet(event.target.elements.tweet);
+};
+
+validateTweetOnInput();
+
 function validateTweet(textarea) {
   // your code here
   // console.log(textarea); //this gives the whole text area, including tag
@@ -60,6 +74,7 @@ function validateTweet(textarea) {
 1. Find the textarea with ID "tweet"
 2. Whenever a user types into it validate it using the previous function
 */
+
 function validateTweetOnInput() {
   // your code here
   const tweet = document.getElementById("tweet");

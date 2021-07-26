@@ -64,20 +64,20 @@ There are currently more than 180 characters in this textarea, which means that 
   <script>
     document.querySelector("#toggle-highlight").onclick = toggleHighlight;
 
-    const listBtn = document.querySelector("#generate-list");
-    listBtn.onclick = () => {
-      const ul = generateList(["apple", "banana", "orange"]);
-      if (ul) {
-        listBtn.insertAdjacentElement("afterend", ul);
-      }
-    };
+    // const listBtn = document.querySelector("#generate-list");
+    // listBtn.onclick = () => {
+    //   const ul = generateList(["apple", "banana", "orange"]);
+    //   if (ul) {
+    //     listBtn.insertAdjacentElement("afterend", ul);
+    //   }
+    // };
 
-    document.querySelector("form").onsubmit = (event) => {
-      event.preventDefault();
-      validateTweet(event.target.elements.tweet);
-    };
+    // document.querySelector("form").onsubmit = (event) => {
+    //   event.preventDefault();
+    //   validateTweet(event.target.elements.tweet);
+    // };
 
-    validateTweetOnInput();
+    // validateTweetOnInput();
 
     setupToggleButtons();
   </script>

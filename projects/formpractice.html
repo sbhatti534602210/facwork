@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pair project</title>
     <link href="../css/mainstyle.css" rel="stylesheet" />
-    <script src="../js/script.js"></script>
-    <link rel="icon" type="image/png" href="/media/workspace.png" />
+    <script async src="../js/script.js"></script>
+    <link rel="icon" type="image/png" href="../media/workspace.png" />
     <script
       src="https://kit.fontawesome.com/f9ad104398.js"
       crossorigin="anonymous"
@@ -41,7 +41,6 @@
         <ul>
           <li><a href="../index.html">Home</a></li>
           <li><a href="../index.html#exercises">Exercises</a></li>
-
           <li><a href="../projects/projectsgallery.html">Projects</a></li>
           <li><a href="../sb-challenges/forloop.html">Challenges</a></li>
           <li><a href="../javascript30/js30exercises.html">JavaScript30</a></li>
@@ -49,6 +48,7 @@
       </nav>
     </header>
     <section class="center">
+      <!-- copy below to agency project -->
       <p>As a potential client, I want to:</p>
       <ul>
         <li>
@@ -63,27 +63,51 @@
         <li>Be notified if the request I’m writing is too long (E2)</li>
         <li>See my request on the page once I click a button (E3)</li>
       </ul>
-      <div class="codebox">
-        <p class="code">New client form</p>
-        <form>
-          <label for="clientname">Client name</label>
-          <textarea id="clientname" name="clientname" rows="1" cols="50">
-Your name or company name</textarea
-          >
+      <p class="code">New client form</p>
+      <form>
+        <label for="clientname">Client name</label>
+        <textarea
+          id="clientname"
+          name="clientname"
+          placeholder="enter your name or company name"
+          rows="1"
+          cols="50"
+        ></textarea>
 
-          <label for="clientemail">Client email address</label>
-          <textarea id="clientemail" name="clientemail" rows="1" cols="50">
-Enter a valid email address</textarea
-          >
+        <label for="clientemail">Client email address</label>
+        <textarea
+          id="clientemail"
+          name="clientemail"
+          placeholder="enter a valid email"
+          rows="1"
+          cols="50"
+        ></textarea>
+        <p class="checkemail"></p>
 
-          <label for="jd">Job description</label>
-          <textarea id="jd" name="jd" rows="5" cols="50">
+        <label for="workrequest">Work request</label>
+        <textarea id="workrequest" name="work" rows="5" cols="50">
 Enter a brief summary of the work you would like us to carry out.
 (Maximum length 300 characters.)</textarea
-          >
-          <button>Submit job request</button>
-        </form>
-      </div>
+        >
+        <p class="checkwr"></p>
+
+        <label for="verifyrobot"
+          >Please type in the following phrase to verfiy you are not a
+          robot:</label
+        >
+        <p class="verifystring">[verification phrase...]</p>
+        <textarea
+          id="verifyrobot"
+          name="verifyrobot"
+          placeholder="enter the phrase  above"
+          rows="1"
+          cols="50"
+        ></textarea>
+        <p class="verified"></p>
+        <button id="submitWR">Submit work request</button>
+      </form>
+      <p></p>
+      <!-- <p class="confirmrequest"></p> -->
     </section>
     <footer class="center">
       <a href="https://twitter.com/codering2"
