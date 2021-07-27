@@ -8,8 +8,11 @@ document.querySelector("form").onsubmit = (event) => {
 const validemail = /\S+@\S+\.\S+/; //double-check
 let validornot = ""
 let requestDetails = [];
-const robotString = "I really am not a robot. Honest."
+const robotString = "Honestly, I really am not a robot."
 const wrLength = 300;
+let isValidEmail = false;
+let isValidWR = false;
+let isValidRobot = false;
 
 // get and name the textarea values
 const clientinput = document.getElementById("clientname");
@@ -22,7 +25,7 @@ const robotoutput = document.querySelector(".verifystring");
 robotoutput.innerHTML = robotString;
 
 // get also where the warnings will be written
-// const confirmedrequest = document.querySelector(".confirmrequest"); // only used when using innerHTML
+const confirmedrequest = document.querySelector(".confirmrequest"); // only used when using innerHTML
 const checkedemail = document.querySelector(".checkemail");
 const checkedwrlength = document.querySelector(".checkwr");
 const verifiedrobot = document.querySelector(".verified");
@@ -50,14 +53,19 @@ submitBtn.addEventListener("click", function() {
   requestDetails = ["Work request description", `name: ${clientinput.value}`, `email: ${cemailinput.value}`, `work request: ${workinput.value}`];
   // console.log(cemailinput.value, workinput.value.length, robotinput.value, requestDetails);
   console.log(requestDetails);
-  validateCEmail(cemailinput.value);
-  validateWorkRequest(workinput.value.length);
-  robotVerification(robotinput.value);
-  const ul = generateWRDescription(requestDetails);
-  if (ul) {
-    submitBtn.insertAdjacentElement("afterend", ul);
+  isValidEmail = validateCEmail(cemailinput.value);
+  isValidWR = validateWorkRequest(workinput.value.length);
+  isValidRobot = robotVerification(robotinput.value);
+  if (isValidEmail === true && isValidWR === true && isValidRobot === true) {
+    const ul = generateWRDescription(requestDetails);
+    if (ul) {
+      submitBtn.insertAdjacentElement("afterend", ul);
+    }
   }
+  else {
+    confirmedrequest.innerHTML = "Please check highlighted form fields and retry.";
   }
+}
 );
 
 // validator functions
@@ -66,12 +74,15 @@ function validateCEmail (address) {
   if (validemail.test(address)) {
     cemailinput.setAttribute("aria-invalid", false);
     validornot = " -> valid email.";
+    isValidEmail = true;
   }
   else {
     cemailinput.setAttribute("aria-invalid", true);
     validornot = " -> invalid email. Check and re-enter";
+    isValidEmail = false;
   }
   checkedemail.innerHTML = cemailinput.value+validornot;
+  return isValidEmail;
 }
 
 // check length of work request which is set above
@@ -79,11 +90,14 @@ function validateWorkRequest(length) {
     if (length > wrLength) {
     workinput.setAttribute("aria-invalid", true);
     checkedwrlength.innerHTML = `Work request is too long, ${length} characters. Check and edit`;
+    isValidWR = false;
   }
   else {
     workinput.setAttribute("aria-invalid", false);
     checkedwrlength.innerHTML = `Work request is ok, ${length} characters.`;
+    isValidWR = true;
   }
+  return isValidWR;
 }
 
 // checking against a verification phrase set above
@@ -93,18 +107,20 @@ function robotVerification(phraseCheck) {
     Attack ships on fire off the shoulder of Orion... \n
     But I believe you are not a robot, you may submit your request.`;
     robotinput.setAttribute("aria-invalid", false);
+    isValidRobot = true;
   }
   else {
     verifiedrobot.innerHTML = `Danger, Will Robinson. \n
     You seem to be a robot. \n
     Check and re-enter.`;
     robotinput.setAttribute("aria-invalid", true);
+    isValidRobot = false;
   }
+  return isValidRobot;
 }
 
 // confirming the request submitted by writing to page
 function generateWRDescription(wrArray) {
-  // confirmedrequest.innerHTML = requestDetails;
   console.dir(wrArray);
   const ulelement =document.createElement('ul');
   console.log(ulelement);
@@ -118,4 +134,5 @@ function generateWRDescription(wrArray) {
     });
     return ulelement; 
 }
+
 // use style sheet to remove the bullets
