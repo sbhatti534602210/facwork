@@ -20,7 +20,7 @@ const cemailinput = document.getElementById("clientemail");
 const workinput = document.getElementById("workrequest");
 const robotinput = document.getElementById("verifyrobot");
 
-
+//this writes the robot test phrase to page
 const robotoutput = document.querySelector(".verifystring");
 robotoutput.innerHTML = robotString;
 
