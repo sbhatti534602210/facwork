@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pair project2</title>
+    <link href="../css/mainstyle.css" rel="stylesheet" />
+    <!-- <script async src="../js/script.js"></script> -->
+    <link rel="icon" type="image/png" href="../media/workspace.png" />
+    <script></script>
+  </head>
+  <body>
+    <header class="headercontainer">
+      <h1>Practice creating API</h1>
+      <nav>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../index.html#exercises">Exercises</a></li>
+          <li><a href="../projects/projectsgallery.html">Projects</a></li>
+          <li><a href="../sb-challenges/forloop.html">Challenges</a></li>
+          <li><a href="../javascript30/js30exercises.html">JavaScript30</a></li>
+        </ul>
+      </nav>
+    </header>
+    <section class="center">
+      <p>Practice API</p>
+      <p>Script</p>
+      >
+      <script>
+        fetch("https://www.themoviedb.org/documentation/api")
+          .then((response) => response.json())
+          .then((response) => console.log(response))
+          .catch((error) => console.log(error));
+      </script>
+    </section>
+    <footer class="center">
+      <a href="https://twitter.com/codering2"
+        ><i class="fab fa-twitter"></i>@codering2</a
+      >
+    </footer>
+  </body>
+</html>

@@ -1,8 +1,8 @@
 // // not entirely sure if this is needed
-document.querySelector("form").onsubmit = (event) => {
-  event.preventDefault();
-  validateWorkRequest(event.target.elements.work);
-};
+// document.querySelector("form").onsubmit = (event) => {
+//   event.preventDefault();
+//   validateWorkRequest(event.target.elements.work);
+// };
 
 // variables that will be compared against or changed
 const validemail = /\S+@\S+\.\S+/; //double-check
@@ -50,7 +50,12 @@ robotinput.addEventListener("keyup", function () {
 // console.dir(requestDetails);
 const submitBtn = document.getElementById("submitWR");
 submitBtn.addEventListener("click", function() {
-  requestDetails = ["Work request description", `name: ${clientinput.value}`, `email: ${cemailinput.value}`, `work request: ${workinput.value}`];
+  requestDetails = [
+    "Work request description", 
+    `name: ${clientinput.value}`, 
+    `email: ${cemailinput.value}`, 
+    `work request: ${workinput.value}`
+  ];
   // console.log(cemailinput.value, workinput.value.length, robotinput.value, requestDetails);
   console.log(requestDetails);
   isValidEmail = validateCEmail(cemailinput.value);
@@ -123,6 +128,7 @@ function robotVerification(phraseCheck) {
 function generateWRDescription(wrArray) {
   console.dir(wrArray);
   const ulelement =document.createElement('ul');
+  ulelement.style.listStyleType= "none";
   console.log(ulelement);
   wrArray.forEach(element => 
     { 

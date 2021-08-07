@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Challenge | Functions and asynchronous JavaScript</title>
+  </head>
+  <body>
+    <h1>Functions, callbacks, & async</h1>
+    <script>
+      // https://learn.foundersandcoders.com/workshops/functions-callbacks-async/
+
+      //   // Functions are variables
+      //   function returnsOne() {
+      //     return 1;
+      //   }
+      //   const returnsOne = () => 1;
+      //   console.log(returnsOne);
+
+      //   Minichallenge1
+      //   https://learn.foundersandcoders.com/workshops/functions-callbacks-async/#mini-challenge-1
+
+      //   function logger(argument1) {
+      //     console.log(argument1);
+      //   }
+      //   logger(returnsOne);
+
+      // const num = 1;
+      // logger(num);
+
+      //   Functions are callable
+      //   const answer1 = returnsOne();
+      // console.log(answer1);
+      //   console.log(`the answer is: ${answer1}`);
+      //   same as:
+      //   console.log(returnsOne());
+
+      //   function returnsNothing() {
+      //     const x = 3 + 5;
+      //   }
+      //   const answer2 = returnsNothing();
+      //   console.log(answer2); // gives undefined
+
+      // Minichallenge2;
+      //   https://learn.foundersandcoders.com/workshops/functions-callbacks-async/#mini-challenge-2
+      //   function returnsOne() {
+      //     return 1;
+      //   }
+      //   function logger(argument2) {
+      //     console.log(argument2);
+      //   }
+      //   logger(returnsOne);
+      // there is a difference
+      //   logger(returnsOne());
+
+      //   function logger(argument2) {
+      //     console.log(argument2);
+      //     console.log(typeof argument2);
+      //   }
+      //   //   logger(returnsOne);
+      //   logger(returnsOne());
+
+      //   Inline functions
+      // https://learn.foundersandcoders.com/workshops/functions-callbacks-async/#inline-functions
+      //   logger(function () {
+      //     return 1;
+      //   });
+      //   logger(() => 1);
+      //   // gives an error: Uncaught ReferenceError: logger is not defined
+
+      // Minichallenge3
+      // type in browser console the follow and then click on the browser area
+      //   window.addEventListener("click", (event) => {
+      //     console.log(event.clientX, event.clientY);
+      //   });
+
+      //   // the inline function is: (event) => { console.log(event.clientX, event.clientY);  }
+      //   const handleClick = (event) => {
+      //     console.log(event.clientX, event.clientY);
+      //   };
+
+      //   //   the eventlistener part is:
+      //   window.addEventListener("click", handleClick);
+      //   // //now you can click around
+
+      //   alternatively
+      //   window.addEventListener("click", (event) => handleClick(event));
+      //   trying this though:
+      //   window.addEventListener("click", handleClick()); //not much happens as it's passing the return value
+
+      //   Callbacks
+      // https://learn.foundersandcoders.com/workshops/functions-callbacks-async/#callbacks
+      //Minichallenge 4
+      //   function one(functioncb) {
+      //     functioncb(1);
+      //   }
+      //   //   one((x) => console.log(x));
+      //   //   alternatively can also do it:
+      //   const log = (x) => console.log(x);
+      //   one(log);
+
+      //   Asynchronous callbacks
+      // https://learn.foundersandcoders.com/workshops/functions-callbacks-async/#asynchronous-callbacks
+      // console.log(1);
+      // setTimeout(() => console.log(2), 1000);
+      // console.log(3);
+
+      //   console.log(1);
+      //   setTimeout(() => console.log(2), 0);
+      //   console.log(3);
+
+      // Minichallenge5
+      //   function asyncDouble(number1, callback1) {
+      //     setTimeout(() => callback1(number1 * 2), 1000);
+      //   }
+      //   asyncDouble(10, (x) => console.log(x));
+
+      //   function countDown(fromNumber) {
+      //     console.log(fromNumber);
+      //     let nextNumber = fromNumber - 1;
+
+      //     if (nextNumber > 0) {
+      //       countDown(nextNumber);
+      //     }
+      //   }
+      //   countDown(3);
+
+      //       Workshop
+      // Let’s use callbacks to make some traffic lights. Download the starter files using the command at the top of this workshop. Open challenge/index.html in your editor.
+
+      // Inside the script tag write a function light that takes two arguments: a string and a callback
+      // It should wait 1 second, log the string and then call its callback argument
+      // Use light to log each colour of a traffic light sequence, in order, followed by "finished"
+      // e.g. It should log:
+      // green
+      // amber
+      // red
+      // amber
+      // green
+      // finished
+      // with a 1 second pause before each colour
+      const colours = ["green", "amber", "red", "amber", "green", "finished"];
+      //   colours.forEach((colour) => setTimeout(trafficlight(colour), 3000));
+      //   colours.forEach((colour, index) => trafficlight(colour));
+      //   function trafficlight(light, callback) {
+      //     // console.log(light);
+      //     // setTimeout(trafficlight, 2000);
+      //     setTimeout(console.log(light), 2000);
+      //   }
+
+      function trafficlight(light, callback) {
+        setTimeout(() => callback(light), 1000);
+        console.log(callback);
+      }
+      colours.forEach((colour) => trafficlight(colour, console.log(colour)));
+
+      // Show Author's Answer:
+      // function light(colour, callback) {
+      //   setTimeout(() => {
+      //     console.log(colour);
+      //     if (callback) {
+      //       callback();
+      //     }
+      //   }, 1000);
+      // }
+      // light("green", () => {
+      //   light("amber", () => {
+      //     light("red", () => {
+      //       light("amber", () => {
+      //         light("green", () => {
+      //           console.log("finished");
+      //         });
+      //       });
+      //     });
+      //   });
+      // });
+    </script>
+  </body>
+</html>

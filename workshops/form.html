@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contact | Learn HTML Forms</title>
+    <link href="form.css" rel="stylesheet" />
+    <link href="../css/mainstyle.css" rel="stylesheet" />
+  </head>
+  <body>
+    <h1>Contact</h1>
+
+    <!-- Your form goes here -->
+    <p>Part One: basic request</p>
+    <form
+      id="form1"
+      action="https://learn-forms.netlify.com/submit/part1"
+      method="GET"
+    >
+      <!-- has to be get not post -->
+      <label for="name">Name</label>
+      <input id="name" name="name" type="text" />
+      <br />
+      <button type="submit">Submit</button>
+    </form>
+    <br />
+    <p>Part Two: different input types</p>
+    <form
+      id="form2"
+      action="https://learn-forms.netlify.com/submit/part2"
+      method="GET"
+    >
+      <label for="name">Name</label>
+      <input id="name" name="name" type="text" />
+
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" />
+
+      <label for="tel">Telephone number</label>
+      <input id="tel" name="tel" type="tel" />
+      <!-- has to be tel not telephone -->
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message"></textarea>
+
+      <label for="marketingConsent">Marketing consent</label>
+      <input id="marketingConsent" name="marketingConsent" type="checkbox" />
+      <!-- has to be marketingConsent not consent or something else -->
+      <br />
+      <button type="submit">Submit</button>
+    </form>
+    <br />
+    <p>Part Three: using radio groupss</p>
+    <form
+      id="form3"
+      action="https://learn-forms.netlify.com/submit/part3"
+      method="GET"
+    >
+      <label for="name">Name</label>
+      <input id="name" name="name" type="text" />
+
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" />
+
+      <label for="tel">Telephone number</label>
+      <input id="te" name="tel" type="tel" />
+
+      <label for="contact-email" class="radio">Email</label>
+      <input
+        id="contact-email"
+        type="radio"
+        name="contact"
+        value="email"
+        checked
+      />
+
+      <label for="contact-tel" class="radio">Telephone</label>
+      <input id="contact-tel" type="radio" name="contact" value="telephone" />
+
+      <label for="contact-post" class="radio">Post</label>
+      <input id="contact-post" type="radio" name="contact" value="post" />
+      <br />
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message"></textarea>
+
+      <label for="marketingConsent">Marketing consent</label>
+      <input id="marketingConsent" name="marketingConsent" type="checkbox" />
+
+      <br />
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Real world fetch</title>
+  </head>
+  <body>
+    <section>
+      <!-- <form>
+        <label for="name">Name</label>
+        <input id="name" />
+
+        <label for="email">Email</label>
+        <input id="email" type="email" />
+
+        <button type="submit">Log</button>
+      </form> -->
+
+      <form>
+        <label for="pmname">Pokemon Name</label>
+        <input id="pmname" name="pmname" />
+
+        <button type="submit">Search</button>
+      </form>
+      <br />
+      <br />
+      <output>outputting...</output>
+    </section>
+    <script>
+      // HTTP errors
+      // challenge1
+      // fetch("https://echo.oliverjam.workers.dev/status/404")
+      // .then((response) => response.json())
+      // .then((response) => console.log(response))
+      // .catch((error) => console.log(error));
+
+      // challenge2
+      // fetch("https://echo.oliverjam.workers.dev/status/404")
+      //   // .then((response) => response.json())
+      //   .then((response) => {
+      //     if (!response.ok) {
+      //       const error = new Error(response.status);
+      //       throw error;
+      //     }
+      //     console.log(response);
+      //   })
+      //   .catch((error) => console.log(error));
+
+      // challenge3
+      // fetch("https://echo.oliverjam.workers.dev/status/404")
+      //   // .then((response) => response.json())
+      //   .then((response) => {
+      //     if (!response.ok) {
+      //       const error = new Error(response.status);
+      //       throw error;
+      //     }
+      //     console.log(response);
+      //   })
+      //   .catch((error) => console.log(error));
+
+      // challenge4
+      // const data = { name: "oli" };
+      // fetch("https://echo.oliverjam.workers.dev/json", {
+      //   method: "POST",
+      //   body: JSON.stringify(data),
+      //   headers: { "content-type": "application/json" },
+      // })
+      //   .then((response) => {
+      //     if (!response.ok) throw new Error(response.status);
+      //     return response.json();
+      //   })
+      //   .then((json) => console.log(json))
+      //   .catch((error) => console.error(error));
+
+      // User input
+      //challenge5 query selector
+      // const form = document.querySelector("form");
+
+      // form.addEventListener("submit", (event) => {
+      //   console.log("here");
+      //   event.preventDefault();
+      //   const name = document.querySelector("#name").value;
+      //   const email = document.querySelector("#email").value;
+      //   const data = { name, email };
+
+      //   fetch("https://echo.oliverjam.workers.dev/json", {
+      //     method: "POST",
+      //     body: JSON.stringify(data),
+      //     headers: { "content-type": "application/json" },
+      //   })
+      //     .then((response) => {
+      //       if (!response.ok) throw new Error(response.status);
+      //       return response.json();
+      //     })
+      //     .then((json) => console.log(json))
+      //     .catch((error) => console.error(error));
+      // });
+
+      // challenge6 new formdata
+
+      //       const form = document.querySelector("form");
+
+      //       form.addEventListener("submit", (event) => {
+      //         // console.log(event);
+      //         event.preventDefault();
+      // // the data is now from form data
+      // const formData = new FormData(form);
+      //     const data = Object.fromEntries(formData);
+      //         fetch("https://reqres.in/api/users", {
+      //           method: "POST",
+      //           body: JSON.stringify(data),
+      //           headers: { "content-type": "application/json" },
+      //         })
+      //           .then((response) => {
+      //             if (!response.ok) throw new Error(response.status);
+      //             return response.json();
+      //           })
+      //           .then((json) => console.log(json))
+      //           .catch((error) => console.error(error));
+      //       });
+
+      //workshop
+      const form = document.querySelector("form");
+      const output = document.querySelector("output");
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        output.innerHTML = "";
+
+        const formData = new FormData(form);
+        const pokemonname = formData.get("pmname");
+
+        const data = Object.fromEntries(formData);
+        fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonname}`)
+          .then((response) => {
+            if (!response.ok) throw new Error(response.status);
+            return response.json();
+          })
+          .then((pokemonData) => {
+            const heading = document.createElement("h2");
+            heading.textContent = pokemonData.pokemonname; // textContent is like innerHTML
+            const image = document.createElement("img");
+            image.src = pokemonData.sprites.front_default;
+            image.alt = "";
+
+            output.append(heading, image);
+          })
+          .catch((error) => {
+            console.error(error);
+            if (error.message === "404") {
+              output.textContent = `Could not find "${pokemonname}"`;
+            } else {
+              output.textContent = "Another kind of error.";
+            }
+          });
+      });
+    </script>
+  </body>
+</html>
