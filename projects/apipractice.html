@@ -29,11 +29,7 @@
       <p>Script</p>
       <h3>Film form</h3>
 
-      <form
-        id="tmdbform"
-        action="https://api.themoviedb.org/3/authentication/token/new?api_key=095c02248bac24e95cec5fc2ad4d586d"
-        method="GET"
-      >
+      <form id="tmdbform">
         <label for="id">ID</label>
         <input id="id" name="id" type="number" />
         <br />
@@ -99,13 +95,75 @@
         //   .then((response) => response.json())
         //   .then((json) => console.log(json));
 
+        // console.log(fetch("https://reqres.in/api/users"));
+
+        // fetch("https://reqres.in/api/users")
+        // .then((res) => console.log(res));
+
+        // fetch("https://reqres.in/api/users")
+        //   .then((res) => res.json())
+        //   .then((data) => console.log(data));
+
+        // fetch("https://reqres.in/api/users/23")
+        //   .then((res) => res.json())
+        //   .then((data) => console.log(data));
+        //   //gives 404
+
+        // fetch("https://reqres.in/api/users/", {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-type": "application/json",
+        //   },
+        //   body: JSON.stringify({
+        //     name: "User1",
+        //   }),
+        // })
+        //   // .then((res) => {
+        //   //   if (res.ok) {
+        //   //     console.log("Success");
+        //   //   } else {
+        //   //     console.log("Not successfull");
+        //   //   }
+        //   // })
+        //   .then((data) => console.log(data))
+        //   .catch((error) => console.log("Error"));
+
+        // variables
+        // const filmID = 76341; //this will change
+        const filmName = "Superman";
+        let filmTitle = "";
+        const APIKey = "095c02248bac24e95cec5fc2ad4d586d";
+        // const fetchURL = "https://api.themoviedb.org/3/movie/";
+        // const connectorTxt = "?api_key=";
         fetch(
-          "https://api.themoviedb.org/3/movie/76341?api_key=095c02248bac24e95cec5fc2ad4d586d"
+          `https://api.themoviedb.org/3/search/movie?api_key=${APIKey}&language=en-US&query=${filmName}&page=1`,
+          {
+            method: "GET",
+          }
         )
           .then((response) => response.json())
-          .then((movie) => fetch(movie.homepage))
-          .then((response) => response.json())
-          .then((response) => console.log(response))
+          // .then((data) => {
+          //   const genresObj = data["genres"];
+          //   console.log(genresObj);
+          // })
+          .then((data) => data.results)
+          .then((results) => {
+            results.forEach((film) => {
+              console.log(film.id);
+            });
+            // const filmTitle = results["title"];
+            // console.log(filmTitle);
+            // const filmURL = results[0]["homepage"];
+            // console.log(filmURL);
+            // const filmDate = results["release_date"].substring(0, 4);
+            // console.log(filmDate);
+            // const filmScore = results["vote_average"];
+            // console.log(filmScore);
+            // const filmOverview = results["overview"];
+            // console.log(filmOverview);
+            // const filmPoster = results["poster_path"];
+            // console.log(filmPoster);
+          })
           .catch((error) => console.log(error));
 
         // fetch(
@@ -114,10 +172,6 @@
         //   .then((response) => response.json())
         //   .then((response) => console.log(response))
         //   .catch((error) => console.log(error));
-
-        // const APIKey = "095c02248bac24e95cec5fc2ad4d586d";
-        // let fetchURL = "https://api.themoviedb.org/3/movie/";
-        // const connectorTxt = "?api_key=";
 
         // const form = document.querySelector("tmdbform");
         // const output = document.querySelector("output");
