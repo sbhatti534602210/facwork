@@ -212,21 +212,25 @@
             .then((results) => {
               const heading = document.createElement("h2");
               heading.textContent = filmName; //
-              const listitem = document.createElement("p");
               output.append(heading);
+              const introtext = document.createElement("p");
+              heading.textContent = "Please choose from the following films:";
+              output.append(introtext);
+              const listmain = document.createElement("ul");
               results.forEach((film) => {
                 console.log(film);
                 console.log(
-                  `hey. looks it's ${film.poster_path} for ${film.title}`
+                  `oh, wowser! looks it's ${film.poster_path} for ${film.title}`
                 );
+                let listitem = document.createElement("li");
                 listitem.textContent = film.title;
-                output.append(listitem);
-              });
-              // const image = document.createElement("img");
-              // image.src = film.poster_path;
-              // image.alt = "";
 
-              // output.append(heading, image);
+                let image = document.createElement("img");
+                imagepath = film.poster_path;
+                image.src = `https://www.themoviedb.org/t/p/w220_and_h330_face/${film.poster_path}`;
+                image.alt = "image probs, could not retrieve image";
+                output.append(listitem, image);
+              });
             })
             .catch((error) => {
               console.error(error);
@@ -241,7 +245,9 @@
 
         // this film will get the film details for the specific film
         function fetchFilmDetails(specificFilm) {
-          form.addEventListener;
+          form.addEventListener("click", (e) => {
+            console.log(e);
+          });
         }
       </script>
     </section>
