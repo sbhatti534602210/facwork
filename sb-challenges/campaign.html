@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Campaign -test</title>
+    <link href="form.css" rel="stylesheet" />
+    <link href="../css/mainstyle.css" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="../media/workspace.png" />
+    <script
+      src="https://kit.fontawesome.com/f9ad104398.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    
+    <header class="headercontainer">
+      <h1>Technical test practice</h1>
+      <nav>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../workshops/workshop.html">Exercises</a></li>
+
+          <li><a href="../projects/projectsgallery.html">Projects</a></li>
+          <li><a href="../sb-challenges/codechallenges.html">Challenges</a></li>
+          <li><a href="../javascript30/js30exercises.html">JavaScript30</a></li>
+        </ul>
+      </nav>
+    <section class="center">
+    <h2>Support our campaigns</h2>
+    <p>Whether getting involved in our projects or fundraising for us, we need your help. Please complete the form.</p>
+    <form
+      id="campaignform"
+    >
+
+      <label for="name">Name</label>
+      <br>
+      <input id="name" name="name" placeholder="enter your name" type="text" />
+      <br>
+      <p class="checkname"></p>
+
+      <label for="email">Email</label>
+      <br>
+      <input id="email" name="email" placeholder="enter a valid email" type="email" />
+      <br>
+      <p class="checkemail"></p>
+
+      <label for="dob">Date of birth</label>
+      <br>
+      <input id="dob" name="dob" placeholder="enter your date of birth" type="date" />
+      <br>
+      <p class="checkdob"></p>
+
+      <label for="tel">Telephone number</label>
+      <br>
+      <input id="tel" name="tel" placeholder="enter a telephone number" type="tel" />
+      <br>
+      <p class="checktel"></p>
+      <br>
+
+      <label for="preference">Select your contact preference</label>
+      <br>
+      <label for="contact-email" class="radio">Email</label>
+      <input
+        id="contact-email"
+        type="radio"
+        name="contact"
+        value="email"
+        checked
+      />
+
+      <label for="contact-tel" class="radio">Telephone</label>
+      <input id="contact-tel" type="radio" name="contact" value="telephone" />
+      <br>
+      <br>
+      <button id="signup" type="submit">Submit details</button>
+    </form>
+</section>
+<script>
+    // variables
+    const emailregex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/; //from https://www.w3resource.com/javascript/form/email-validation.php
+    let emailmsg = "";
+    let isEmailValid = false;
+    let isWR = false;
+    let contactDetails = [];
+
+    // variables from the form
+    const nameinput = document.getElementById("name");
+    const emailinput = document.getElementById("email");
+    const telinput = document.getElementById("tel");
+    const submitBtn = document.getElementById("signup");
+
+    // // check email address as it is typed
+    // emailinput.addEventListener("keyup", function() {
+
+    // });
+
+    // on submitting the form
+    submitBtn.addEventListener("click", function() {
+      contactDetails = [
+        `name: ${nameinput.value}`,
+        `email: ${emailinput.value}`,
+        `telephone: ${telinput.value}`,
+        `dob: ${dobinput.value}`,
+        `preference: ${preferenceinput.value}`,
+      ];
+      isEmailValid
+    });
+
+
+</script>
+  </body>
+</html>

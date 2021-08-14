@@ -57,200 +57,200 @@
       <output>The output will be here shortly...</output>
       <br />
       <br />
-      <script>
-        // Working out fetch command
-        // fetch("https://pokeapi.co/api/v2/pokemon/ditto", {})
-        //  .then((response) =>  console.log(response));
-
-        // fetch("https://pokeapi.co/api/v2/pokemon/ditto", {})
-        //   .then((response) => response.json())
-        //   .then((data) => console.log(data));
-
-        // fetch("https://pokeapi.co/api/v2/pokemon/ditto", {})
-        //   .then((response) => response.text())
-        //   .then((data) => console.log(data));
-
-        //handling errors
-        // fetch("https://pokeapi.co/api/v2/pokemon/saira", {})
-        //   .then((data) => console.log(data))
-        //   .catch((error) => console.log("ERROR"));
-
-        // for server errors, because saira pokemon does not exist really need different error catching. to make it work i.e. data.ok try snorlax
-        // fetch("https://pokeapi.co/api/v2/pokemon/saira", {}).then((data) => {
-        //   if (data.ok) {
-        //     console.log("success");
-        //   } else {
-        //     console.log("whoops, server error");
-        //   }
-        // });
-
-        // fetch("https://jsonplaceholder.typicode.com/posts", {
-        //   method: "POST",
-        //   body: JSON.stringify({
-        //     title: "New Post",
-        //     body: "Some text",
-        //     userid: 1,
-        //   }),
-        //   headers: {
-        //     "Content-type": "application/json; charset=UTF-8",
-        //   },
-        // })
-        //   .then((response) => response.json())
-        //   .then((json) => console.log(json));
-
-        // console.log(fetch("https://reqres.in/api/users"));
-
-        // fetch("https://reqres.in/api/users")
-        // .then((res) => console.log(res));
-
-        // fetch("https://reqres.in/api/users")
-        //   .then((res) => res.json())
-        //   .then((data) => console.log(data));
-
-        // fetch("https://reqres.in/api/users/23")
-        //   .then((res) => res.json())
-        //   .then((data) => console.log(data));
-        //   //gives 404
-
-        // fetch("https://reqres.in/api/users/", {
-        //   method: "POST",
-        //   headers: {
-        //     "Content-type": "application/json",
-        //   },
-        //   body: JSON.stringify({
-        //     name: "User1",
-        //   }),
-        // })
-        //   // .then((res) => {
-        //   //   if (res.ok) {
-        //   //     console.log("Success");
-        //   //   } else {
-        //   //     console.log("Not successfull");
-        //   //   }
-        //   // })
-        //   .then((data) => console.log(data))
-        //   .catch((error) => console.log("Error"));
-
-        // on to film problem
-
-        // fetch(
-        //   "https://api.themoviedb.org/3/movie/550?api_key=095c02248bac24e95cec5fc2ad4d586d"
-        // )
-        //   .then((response) => response.json())
-        //   .then((response) => console.log(response))
-        //   .catch((error) => console.log(error));
-
-        // variables
-        // const filmID = 76341; //this will change
-        // const filmName = "Superman";
-        // let filmTitle = "";
-        // const APIKey = "095c02248bac24e95cec5fc2ad4d586d";
-        // const fetchURL = "https://api.themoviedb.org/3/movie/";
-        // const connectorTxt = "?api_key=";
-        // the url: https://api.themoviedb.org/3/search/movie?api_key=095c02248bac24e95cec5fc2ad4d586d&language=en-US&query=Superman&page=1
-        // fetch(
-        //   `https://api.themoviedb.org/3/search/movie?api_key=${APIKey}&language=en-US&query=${filmName}&page=1`,
-        //   {
-        //     method: "GET",
-        //   }
-        // )
-        //   .then((response) => response.json())
-        //   // .then((data) => {
-        //   //   const genresObj = data["genres"];
-        //   //   console.log(genresObj);
-        //   // })
-        //   .then((data) => data.results)
-        //   .then((results) => {
-        //     results.forEach((film) => {
-        //       console.log(film.id);
-        //     });
-        //     // const filmTitle = results["title"];
-        //     // console.log(filmTitle);
-        //     // const filmURL = results[0]["homepage"];
-        //     // console.log(filmURL);
-        //     // const filmDate = results["release_date"].substring(0, 4);
-        //     // console.log(filmDate);
-        //     // const filmScore = results["vote_average"];
-        //     // console.log(filmScore);
-        //     // const filmOverview = results["overview"];
-        //     // console.log(filmOverview);
-        //     // const filmPoster = results["poster_path"];
-        //     // console.log(filmPoster);
-        //   })
-        //   .catch((error) => console.log(error));
-        // that did work but display only to console
-
-        const APIKey = "095c02248bac24e95cec5fc2ad4d586d";
-        // const form = document.querySelector("tmdbform");
-        const form = document.querySelector("form");
-        const output = document.querySelector("output");
-
-        // this function will get all the films with that film name
-        // function fetchFilmID() {
-        form.addEventListener("submit", (event) => {
-          event.preventDefault();
-
-          output.innerHTML = "";
-
-          const tmdbformData = new FormData(form);
-          const filmName = tmdbformData.get("film");
-          // const data = Object.fromEntries(tmdbformData);
-          // console.log(filmName);
-          fetch(
-            `https://api.themoviedb.org/3/search/movie?api_key=${APIKey}&language=en-US&query=${filmName}&page=1`,
-            { method: "GET" }
-          )
-            .then((response) => {
-              if (!response.ok) throw new Error(response.status);
-              return response.json();
-            })
-            .then((data) => data.results)
-            // .then((results) => {
-            //   console.log(results);
-            //   // console.log(filmName);
-            // })
-            .then((results) => {
-              const heading = document.createElement("h2");
-              heading.textContent = filmName; //
-              output.append(heading);
-              const introtext = document.createElement("p");
-              heading.textContent = "Please choose from the following films:";
-              output.append(introtext);
-              const listmain = document.createElement("ul");
-              results.forEach((film) => {
-                console.log(film);
-                console.log(
-                  `oh, wowser! looks it's ${film.poster_path} for ${film.title}`
-                );
-                let listitem = document.createElement("li");
-                listitem.textContent = film.title;
-
-                let image = document.createElement("img");
-                imagepath = film.poster_path;
-                image.src = `https://www.themoviedb.org/t/p/w220_and_h330_face/${film.poster_path}`;
-                image.alt = "image probs, could not retrieve image";
-                output.append(listitem, image);
-              });
-            })
-            .catch((error) => {
-              console.error(error);
-              if (error.message === "404") {
-                output.textContent = `Could not find "${filmName}"`;
-              } else {
-                output.textContent = "Another kind of error.";
-              }
-            });
-        });
-        // }
-
-        // this film will get the film details for the specific film
-        function fetchFilmDetails(specificFilm) {
-          form.addEventListener("click", (e) => {
-            console.log(e);
-          });
-        }
-      </script>
     </section>
+    <script>
+      // Working out fetch command
+      // fetch("https://pokeapi.co/api/v2/pokemon/ditto", {})
+      //  .then((response) =>  console.log(response));
+
+      // fetch("https://pokeapi.co/api/v2/pokemon/ditto", {})
+      //   .then((response) => response.json())
+      //   .then((data) => console.log(data));
+
+      // fetch("https://pokeapi.co/api/v2/pokemon/ditto", {})
+      //   .then((response) => response.text())
+      //   .then((data) => console.log(data));
+
+      //handling errors
+      // fetch("https://pokeapi.co/api/v2/pokemon/saira", {})
+      //   .then((data) => console.log(data))
+      //   .catch((error) => console.log("ERROR"));
+
+      // for server errors, because saira pokemon does not exist really need different error catching. to make it work i.e. data.ok try snorlax
+      // fetch("https://pokeapi.co/api/v2/pokemon/saira", {}).then((data) => {
+      //   if (data.ok) {
+      //     console.log("success");
+      //   } else {
+      //     console.log("whoops, server error");
+      //   }
+      // });
+
+      // fetch("https://jsonplaceholder.typicode.com/posts", {
+      //   method: "POST",
+      //   body: JSON.stringify({
+      //     title: "New Post",
+      //     body: "Some text",
+      //     userid: 1,
+      //   }),
+      //   headers: {
+      //     "Content-type": "application/json; charset=UTF-8",
+      //   },
+      // })
+      //   .then((response) => response.json())
+      //   .then((json) => console.log(json));
+
+      // console.log(fetch("https://reqres.in/api/users"));
+
+      // fetch("https://reqres.in/api/users")
+      // .then((res) => console.log(res));
+
+      // fetch("https://reqres.in/api/users")
+      //   .then((res) => res.json())
+      //   .then((data) => console.log(data));
+
+      // fetch("https://reqres.in/api/users/23")
+      //   .then((res) => res.json())
+      //   .then((data) => console.log(data));
+      //   //gives 404
+
+      // fetch("https://reqres.in/api/users/", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-type": "application/json",
+      //   },
+      //   body: JSON.stringify({
+      //     name: "User1",
+      //   }),
+      // })
+      //   // .then((res) => {
+      //   //   if (res.ok) {
+      //   //     console.log("Success");
+      //   //   } else {
+      //   //     console.log("Not successfull");
+      //   //   }
+      //   // })
+      //   .then((data) => console.log(data))
+      //   .catch((error) => console.log("Error"));
+
+      // on to film problem
+
+      // fetch(
+      //   "https://api.themoviedb.org/3/movie/550?api_key=095c02248bac24e95cec5fc2ad4d586d"
+      // )
+      //   .then((response) => response.json())
+      //   .then((response) => console.log(response))
+      //   .catch((error) => console.log(error));
+
+      // variables
+      // const filmID = 76341; //this will change
+      // const filmName = "Superman";
+      // let filmTitle = "";
+      // const APIKey = "095c02248bac24e95cec5fc2ad4d586d";
+      // const fetchURL = "https://api.themoviedb.org/3/movie/";
+      // const connectorTxt = "?api_key=";
+      // the url: https://api.themoviedb.org/3/search/movie?api_key=095c02248bac24e95cec5fc2ad4d586d&language=en-US&query=Superman&page=1
+      // fetch(
+      //   `https://api.themoviedb.org/3/search/movie?api_key=${APIKey}&language=en-US&query=${filmName}&page=1`,
+      //   {
+      //     method: "GET",
+      //   }
+      // )
+      //   .then((response) => response.json())
+      //   // .then((data) => {
+      //   //   const genresObj = data["genres"];
+      //   //   console.log(genresObj);
+      //   // })
+      //   .then((data) => data.results)
+      //   .then((results) => {
+      //     results.forEach((film) => {
+      //       console.log(film.id);
+      //     });
+      //     // const filmTitle = results["title"];
+      //     // console.log(filmTitle);
+      //     // const filmURL = results[0]["homepage"];
+      //     // console.log(filmURL);
+      //     // const filmDate = results["release_date"].substring(0, 4);
+      //     // console.log(filmDate);
+      //     // const filmScore = results["vote_average"];
+      //     // console.log(filmScore);
+      //     // const filmOverview = results["overview"];
+      //     // console.log(filmOverview);
+      //     // const filmPoster = results["poster_path"];
+      //     // console.log(filmPoster);
+      //   })
+      //   .catch((error) => console.log(error));
+      // that did work but display only to console
+
+      const APIKey = "095c02248bac24e95cec5fc2ad4d586d";
+      // const form = document.querySelector("tmdbform");
+      const form = document.querySelector("form");
+      const output = document.querySelector("output");
+
+      // this function will get all the films with that film name
+      // function fetchFilmID() {
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        output.innerHTML = "";
+
+        const tmdbformData = new FormData(form);
+        const filmName = tmdbformData.get("film");
+        // const data = Object.fromEntries(tmdbformData);
+        // console.log(filmName);
+        fetch(
+          `https://api.themoviedb.org/3/search/movie?api_key=${APIKey}&language=en-US&query=${filmName}&page=1`,
+          { method: "GET" }
+        )
+          .then((response) => {
+            if (!response.ok) throw new Error(response.status);
+            return response.json();
+          })
+          .then((data) => data.results)
+          // .then((results) => {
+          //   console.log(results);
+          //   // console.log(filmName);
+          // })
+          .then((results) => {
+            const heading = document.createElement("h2");
+            heading.textContent = filmName; //
+            output.append(heading);
+            const introtext = document.createElement("p");
+            heading.textContent = "Please choose from the following films:";
+            output.append(introtext);
+            const listmain = document.createElement("ul");
+            results.forEach((film) => {
+              console.log(film);
+              console.log(
+                `oh, wowser! looks it's ${film.poster_path} for ${film.title}`
+              );
+              let listitem = document.createElement("li");
+              listitem.textContent = film.title;
+
+              let image = document.createElement("img");
+              imagepath = film.poster_path;
+              image.src = `https://www.themoviedb.org/t/p/w220_and_h330_face/${film.poster_path}`;
+              image.alt = "image probs, could not retrieve image";
+              output.append(listitem, image);
+            });
+          })
+          .catch((error) => {
+            console.error(error);
+            if (error.message === "404") {
+              output.textContent = `Could not find "${filmName}"`;
+            } else {
+              output.textContent = "Another kind of error.";
+            }
+          });
+      });
+      // }
+
+      // this film will get the film details for the specific film
+      function fetchFilmDetails(specificFilm) {
+        form.addEventListener("click", (e) => {
+          console.log(e);
+        });
+      }
+    </script>
     <footer class="center">
       <a href="https://twitter.com/codering2"
         ><i class="fab fa-twitter"></i>@codering2</a
