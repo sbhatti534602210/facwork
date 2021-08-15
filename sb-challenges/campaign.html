@@ -4,8 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Campaign -test</title>
-    <link href="form.css" rel="stylesheet" />
     <link href="../css/mainstyle.css" rel="stylesheet" />
+    <link href="../css/form.css" rel="stylesheet" />
+
     <link rel="icon" type="image/png" href="../media/workspace.png" />
     <script
       src="https://kit.fontawesome.com/f9ad104398.js"
@@ -28,20 +29,20 @@
       </nav>
     <section class="center">
     <h2>Support our campaigns</h2>
-    <p>Whether getting involved in our projects or fundraising for us, we need your help. Please complete the form.</p>
+    <p>Whether getting involved in our projects or fundraising for us, we need your help. Please complete the form below.</p>
     <form
       id="campaignform"
     >
 
       <label for="name">Name</label>
       <br>
-      <input id="name" name="name" placeholder="enter your name" type="text" />
+      <input id="name" name="name" placeholder="enter your name" type="text" required />
       <br>
       <p class="checkname"></p>
 
       <label for="email">Email</label>
       <br>
-      <input id="email" name="email" placeholder="enter a valid email" type="email" />
+      <input id="email" name="email" placeholder="enter a valid email" type="email" required />
       <br>
       <p class="checkemail"></p>
 
@@ -53,7 +54,7 @@
 
       <label for="tel">Telephone number</label>
       <br>
-      <input id="tel" name="tel" placeholder="enter a telephone number" type="tel" />
+      <input id="tel" name="tel" placeholder="enter a telephone number" type="tel" required />
       <br>
       <p class="checktel"></p>
       <br>
