@@ -5,13 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Campaign -test</title>
     <link href="../css/mainstyle.css" rel="stylesheet" />
-    <link href="../css/form.css" rel="stylesheet" />
+    <!-- <link href="../css/form.css" rel="stylesheet" /> -->
 
     <link rel="icon" type="image/png" href="../media/workspace.png" />
     <script
       src="https://kit.fontawesome.com/f9ad104398.js"
       crossorigin="anonymous"
     ></script>
+    <style>
+      input:not([type="checkbox"]):not([type="radio"]),
+      button,
+      textarea {
+        display: block;
+        font: inherit;
+        color: inherit;
+      }
+
+      textarea {
+        margin: 0.5rem 0;
+        padding: 0.5rem;
+      }
+
+      [aria-invalid="true"] {
+        box-shadow: 0 0 0 3px red;
+      }
+      [aria-invalid="false"] {
+        box-shadow: 0 0 0 3px green;
+      }
+      /* to highlight the alert */
+      .confirmrequest {
+        font-weight: bold;
+        color: red;
+      }
+    </style>
   </head>
   <body>
     
@@ -28,87 +54,203 @@
         </ul>
       </nav>
     <section class="center">
-    <h2>Support our campaigns</h2>
+      <img
+      class="bannerimage"
+      src="../media/8334699330_72e6c0365c_o_adobespark_c.jfif"
+    />
+    <h2>Technical test: create a contact form</h2>
+    <h3>Support our campaigns</h3>
     <p>Whether getting involved in our projects or fundraising for us, we need your help. Please complete the form below.</p>
     <form
       id="campaignform"
     >
-
       <label for="name">Name</label>
       <br>
       <input id="name" name="name" placeholder="enter your name" type="text" required />
       <br>
-      <p class="checkname"></p>
-
+      
       <label for="email">Email</label>
       <br>
       <input id="email" name="email" placeholder="enter a valid email" type="email" required />
-      <br>
       <p class="checkemail"></p>
 
       <label for="dob">Date of birth</label>
       <br>
       <input id="dob" name="dob" placeholder="enter your date of birth" type="date" />
-      <br>
       <p class="checkdob"></p>
 
       <label for="tel">Telephone number</label>
       <br>
       <input id="tel" name="tel" placeholder="enter a telephone number" type="tel" required />
-      <br>
       <p class="checktel"></p>
-      <br>
 
-      <label for="preference">Select your contact preference</label>
+      <label>Select your contact preference</label>
       <br>
-      <label for="contact-email" class="radio">Email</label>
+      <label for="preferemail">Email</label>
       <input
-        id="contact-email"
+        id="preferemail"
         type="radio"
-        name="contact"
+        name="contactpreference"
         value="email"
         checked
       />
 
-      <label for="contact-tel" class="radio">Telephone</label>
-      <input id="contact-tel" type="radio" name="contact" value="telephone" />
+      <label for="prefertel">Telephone</label>
+      <input 
+        id="prefertel" 
+        type="radio" 
+        name="contactpreference" 
+        value="telephone" />
+
       <br>
       <br>
-      <button id="signup" type="submit">Submit details</button>
+      <button id="signup" type="button">Submit details</button>    
+      <br>
+      <br>
+      <output>Details as a JSON Object. I don't know how to make a file or write to a database yet.</output>
+      
     </form>
+    <p class="confirmdetails"></p>
 </section>
 <script>
     // variables
     const emailregex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/; //from https://www.w3resource.com/javascript/form/email-validation.php
-    let emailmsg = "";
+    // or https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/email
+    const dateregex = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/; //from https://www.w3resource.com/javascript/form/javascript-date-validation.php
+    const telregex = /^\d{11}$/; //will it be enough? could also use maxlength="11" in input. also, edit regex to allow spaces or -. what about + 44 prefix v non-prefix
+    
+    let emailmsg = ""; //this will be added to
+    let dobmsg = ""; 
+    let telmsg = ""; 
     let isEmailValid = false;
-    let isWR = false;
+    let isDOBValid = false;
+    let isTelValid = false;
     let contactDetails = [];
 
     // variables from the form
     const nameinput = document.getElementById("name");
     const emailinput = document.getElementById("email");
+    const dobinput = document.getElementById("dob");
     const telinput = document.getElementById("tel");
+    // const preferenceinput = document.getElementsByName("contactpreference"); //check this again
+
     const submitBtn = document.getElementById("signup");
+    const output = document.querySelector("output");
 
-    // // check email address as it is typed
-    // emailinput.addEventListener("keyup", function() {
+    // where error messages can be shown
+    const confirmDetails = document.querySelector(".confirmdetails");
+    const checkedEmail = document.querySelector(".checkemail");
+    const checkedDOB = document.querySelector(".checkdob");
+    const checkedTel = document.querySelector(".checktel");
 
-    // });
-
-    // on submitting the form
-    submitBtn.addEventListener("click", function() {
-      contactDetails = [
-        `name: ${nameinput.value}`,
-        `email: ${emailinput.value}`,
-        `telephone: ${telinput.value}`,
-        `dob: ${dobinput.value}`,
-        `preference: ${preferenceinput.value}`,
-      ];
-      isEmailValid
+    // // check validity as input is typed
+    emailinput.addEventListener("keyup", function() {
+      validateEmail(emailinput.value);
+    });
+    dobinput.addEventListener("keyup", function() {
+      const dobedited = reformatDOB(dobinput.value);
+      validateDOB(dobedited);
+    });
+    telinput.addEventListener("keyup", function() {
+      validateTel(telinput.value);
     });
 
+    // check validity on submitting the form
+    submitBtn.addEventListener("click", function() {
+    const dobedited = reformatDOB(dobinput.value);
+    output.innerHTML = "";
+    const preferenceinput = document.querySelector('input[type=radio][name="contactpreference"]:checked');
+    // console.log(preferenceinput);
+    // console.log(preferenceinput.value);
+    contactDetails = [
+      `name: ${nameinput.value}`,
+      `email: ${emailinput.value}`,
+      `dob: ${dobedited}`,
+      `telephone: ${telinput.value}`,
+      `preference: ${preferenceinput.value}`,
+    ];
 
+    // console.log(contactDetails);
+    // call the mini-functions to test if the inputs are valid
+    isEmailValid = validateEmail(emailinput.value);
+    isDOBValid = validateDOB(dobedited);
+    isTelValid = validateTel(telinput.value);
+
+    console.log(`e ${isEmailValid} d ${isDOBValid} t ${isTelValid}`);
+      // if they are all valid
+    if (isEmailValid === true && isDOBValid === true && isTelValid === true) {
+      const newContact = generateContact(contactDetails);
+      confirmDetails.innerHTML = `Thank you for submitting your details, ${nameinput.value}.`;
+    }
+    // or if they are not valid at submit
+    else {
+      confirmDetails.innerHTML = "Please check highlighted form fields and try again.";
+    }
+  });
+
+//reformat the date
+function reformatDOB(datestr) {
+      const yyyy = datestr.slice(0, 4);
+      const mm = datestr.slice(5, 7);
+      const dd = datestr.slice(8, 10);
+      // console.log(`y: ${yyyy} m: ${mm} d: ${dd}`);
+      return dd+"-"+mm+"-"+yyyy;
+    }
+
+    // the validator functions
+    function validateEmail (emailaddress) {
+      if (emailregex.test(emailaddress)) {
+        emailinput.setAttribute("aria-invalid", false);
+        emailmsg = " -> valid email format.";
+        isEmailValid = true;
+      }
+      else {
+        emailinput.setAttribute("aria-invalid", true);
+        emailmsg = " -> invalid email format. Check and re-enter.";
+        isEmailValid = false;
+      }
+      checkedEmail.innerHTML = emailinput.value+emailmsg;
+      return isEmailValid;
+    }
+
+    function validateDOB (dateob) {
+      if (dateregex.test(dateob)) {
+        dobinput.setAttribute("aria-invalid", false);
+        dobmsg = " -> valid date format.";
+        isDOBValid = true;
+      }
+      else {
+        dobinput.setAttribute("aria-invalid", true);
+        dobmsg = " -> invalid date format. Check and re-enter.";
+        isDOBValid = false;
+      }
+      checkedDOB.innerHTML = dateob+dobmsg;
+      return isDOBValid;
+    }
+
+    function validateTel (telephone) {
+      if (telregex.test(telephone)) {
+        telinput.setAttribute("aria-invalid", false);
+        telmsg = " -> valid telephone format.";
+        isTelValid = true;
+      }
+      else {
+        telinput.setAttribute("aria-invalid", true);
+        telmsg = " -> invalid telephone format. Check and re-enter.";
+        isTelValid = false;
+      }
+      checkedTel.innerHTML = telinput.value+telmsg;
+      return isTelValid;
+    }
+  
+    function generateContact (contactarray) {
+      console.log(`generated: ${contactarray}`);
+      const contactstoString = JSON.stringify(Object.assign({}, contactarray));
+      const stringtoJSONObj = JSON.parse(contactstoString);
+      console.log(stringtoJSONObj);
+      // I don't know how to make a json file from javascript yet.
+      output.innerHTML = contactstoString;
+    }
 </script>
   </body>
 </html>
