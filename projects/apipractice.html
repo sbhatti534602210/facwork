@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pair project2</title>
+    <title>API practice</title>
     <link href="../css/mainstyle.css" rel="stylesheet" />
     <!-- <script async src="../js/script.js"></script> -->
     <link rel="icon" type="image/png" href="../media/workspace.png" />
@@ -12,7 +12,7 @@
   </head>
   <body>
     <header class="headercontainer">
-      <h1>Practice creating API</h1>
+      <h1>Practice creating content using APIs</h1>
       <nav>
         <ul>
           <li><a href="../index.html">Home</a></li>
@@ -25,8 +25,7 @@
       </nav>
     </header>
     <section class="center">
-      <h2>Practice API</h2>
-      <p>Script</p>
+      <h2>Search films</h2>
       <h3>Film form</h3>
 
       <!-- <form id="tmdbform" name="tmdbform"> -->
@@ -54,9 +53,13 @@
         <button type="submit">Search</button>
       </form>
       <br />
-      <output>The output will be here shortly...</output>
-      <br />
-      <br />
+      <section class="x3grid">
+        <output>The film search output will be here shortly...</output>
+        <p id="filmdetails">
+          Details of the film you selected will here in a mo'...
+        </p>
+        <p id="filmreview">Film review (maybe)</p>
+      </section>
     </section>
     <script>
       // Working out fetch command
@@ -185,6 +188,11 @@
       // const form = document.querySelector("tmdbform");
       const form = document.querySelector("form");
       const output = document.querySelector("output");
+      const filmInfo = document.getElementById("filmdetails");
+
+      //trying the guardian and nyt api
+      // const GAPIKey = "35029cc7-27f9-44ff-ab18-2e7b98fb1290";
+      // const NYTAPIKey =
 
       // this function will get all the films with that film name
       // function fetchFilmID() {
@@ -212,25 +220,28 @@
           // })
           .then((results) => {
             const heading = document.createElement("h2");
-            heading.textContent = filmName; //
+            heading.textContent = `You searched for: "${filmName}"`; //
             output.append(heading);
             const introtext = document.createElement("p");
-            heading.textContent = "Please choose from the following films:";
+            introtext.textContent =
+              "Please choose from the following films to see more details:";
             output.append(introtext);
             const listmain = document.createElement("ul");
             results.forEach((film) => {
               console.log(film);
               console.log(
-                `oh, wowser! looks it's ${film.poster_path} for ${film.title}`
+                `oh, wowser! looks it's ${film.poster_path} for ${film.title} with ${film.id}`
               );
               let listitem = document.createElement("li");
-              listitem.textContent = film.title;
-
+              listitem.textContent = film.title + "   ";
               let image = document.createElement("img");
-              imagepath = film.poster_path;
+              // imagepath = film.poster_path;
               image.src = `https://www.themoviedb.org/t/p/w220_and_h330_face/${film.poster_path}`;
               image.alt = "image probs, could not retrieve image";
-              output.append(listitem, image);
+              // output.append(listitem, image);
+              listitem.append(image);
+              output.append(listitem);
+              listitem.addEventListener("click", () => filmDetails(film.id));
             });
           })
           .catch((error) => {
@@ -242,13 +253,53 @@
             }
           });
       });
-      // }
 
       // this film will get the film details for the specific film
-      function fetchFilmDetails(specificFilm) {
-        form.addEventListener("click", (e) => {
-          console.log(e);
-        });
+      function filmDetails(specificFilmID) {
+        // alert(specificFilmID);
+        fetch(
+          `https://api.themoviedb.org/3/movie/${specificFilmID}?api_key=41d1b7ae08dbbe368bc25603c8e9b829&language=en-US`
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            filmInfo.innerHTML = "";
+            // alert(data);
+
+            const filmTitle = document.createElement("h2");
+            filmTitle.innerText = data.title;
+            filmInfo.append(filmTitle);
+
+            const filmSummary = document.createElement("p");
+            filmSummary.innerHTML =
+              "Overview: " +
+              data.overview +
+              " Film website: " +
+              data.homepage +
+              ".";
+            filmInfo.append(filmSummary);
+
+            const releaseInfo = document.createElement("p");
+            releaseInfo.innerHTML =
+              "Released in: " +
+              data.release_date.slice(0, 4) +
+              ", in language: " +
+              data.original_language +
+              ".";
+            filmInfo.append(releaseInfo);
+
+            const filmPopularity = document.createElement("p");
+            filmPopularity.innerHTML =
+              "Popularity: " +
+              Math.round(data.popularity) +
+              "%, revenue: $" +
+              data.revenue.toLocaleString("en-US") +
+              ", TMDB vote average: " +
+              data.vote_average +
+              "/10 (by " +
+              data.vote_count +
+              " voters).";
+            filmInfo.append(filmPopularity);
+          });
       }
     </script>
     <footer class="center">
