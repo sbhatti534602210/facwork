@@ -34,7 +34,150 @@
       <h2>Technical test: create a colour scheme generator</h2>
 
       <p>Something here.</p>
+      <p>
+        Hexcode can be converted from RGB codes which are made up of three sets
+        of numbers between 0 and 255.
+      </p>
+      <ol>
+        <li>Random number generator to create number between 0 and 255.</li>
+        <li>Combine?</li>
+        <li>Convert to hexcode.</li>
+      </ol>
+      <h3>Random colour generator</h3>
+      <form>
+        <button id="generator" type="button">Generate colour</button>
+      </form>
+      <br />
+      <section class="x3grid">
+        <!-- <output id="first">Colours generated here. </output>
+        <output id="second">Colours generated here.</output>
+        <output id="third">Colours generated here.</output> -->
+
+        <div id="firstbox">
+          <p>Colours generated here.</p>
+          <br />
+          <button id="changefirstcolour" type="button">Change</button>
+        </div>
+
+        <div id="secondbox">
+          <p>Colours generated here.</p>
+          <br />
+          <button id="changesecondcolour" type="button">Change</button>
+        </div>
+
+        <div id="thirdbox">
+          <p>Colours generated here.</p>
+          <br />
+          <button id="changethirdcolour" type="button">Change</button>
+        </div>
+      </section>
+
+      <br />
+      <p></p>
     </section>
+    <script>
+      // variables from the form
+      const submitBtn = document.getElementById("generator");
+      const firstColour = document.getElementById("firstbox");
+      const secondColour = document.getElementById("secondbox");
+      const thirdColour = document.getElementById("thirdbox");
+
+      const changeOne = document.getElementById("changefirstcolour");
+      const changeTwo = document.getElementById("changesecondcolour");
+      const changeThree = document.getElementById("changethirdcolour");
+
+      // input from the form/interaction
+      submitBtn.addEventListener("click", function () {
+        // const r = getRandomInt();
+        // const g = getRandomInt();
+        // const b = getRandomInt();
+        // console.log(r, g, b);
+
+        // const hexed = hexIT(r, g, b);
+        const hexed1 = hexIT(getRandomInt(), getRandomInt(), getRandomInt());
+        const hexed2 = hexIT(getRandomInt(), getRandomInt(), getRandomInt());
+        const hexed3 = hexIT(getRandomInt(), getRandomInt(), getRandomInt());
+
+        // console.log(hexed);
+
+        firstColour.innerHTML = hexed1;
+        secondColour.innerHTML = hexed2;
+        thirdColour.innerHTML = hexed3;
+
+        firstColour.style.backgroundColor = `#${hexed1}`;
+        secondColour.style.backgroundColor = `#${hexed2}`;
+        thirdColour.style.backgroundColor = `#${hexed3}`;
+      });
+
+      changeOne.addEventListener("click", function () {
+        const hexedmore = hexIT(getRandomInt());
+        firstColour.innerHTML = hexedmore;
+        firstColour.style.backgroundColor = `#${hexedmore}`;
+      });
+
+      changeTwo.addEventListener("click", function () {
+        const hexedmore = hexIT(getRandomInt());
+        secondColour.innerHTML = hexedmore;
+        secondColour.style.backgroundColor = `#${hexedmore}`;
+      });
+
+      changeThree.addEventListener("click", function () {
+        const hexedmore = hexIT(getRandomInt());
+        thirdColour.innerHTML = hexedmore;
+        thirdColour.style.backgroundColor = `#${hexedmore}`;
+      });
+
+      // functionating
+      function getRandomInt() {
+        return Math.floor(Math.random() * 255);
+      }
+
+      function hexIT(r, g, b) {
+        if (r > 255) {
+          r = 255;
+        }
+        if (g > 255) {
+          g = 255;
+        }
+        if (b > 255) {
+          b = 255;
+        }
+        if (r < 0) {
+          r = 0;
+        }
+        if (g < 0) {
+          g = 0;
+        }
+        if (b < 0) {
+          b = 0;
+        }
+        let firstpart = r.toString(16);
+        if (firstpart.length === 1) {
+          firstpart = "0" + firstpart;
+        }
+        let secondpart = g.toString(16);
+        if (secondpart.length === 1) {
+          secondpart = "0" + secondpart;
+        }
+        let thirdpart = b.toString(16);
+        if (thirdpart.length === 1) {
+          thirdpart = "0" + thirdpart;
+        }
+        let hexcolour = firstpart + secondpart + thirdpart;
+        return hexcolour.toUpperCase();
+      }
+    </script>
+    <style>
+      #firstbox {
+        background-color: white;
+      }
+      #secondbox {
+        background-color: white;
+      }
+      #thirdbox {
+        background-color: white;
+      }
+    </style>
     <footer class="center">
       <a href="https://twitter.com/codering2"
         ><i class="fab fa-twitter"></i>@codering2</a

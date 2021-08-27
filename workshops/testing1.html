@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Learn Testing</title>
+  </head>
+  <body>
+    <h1>Open the console</h1>
+
+    <script>
+      // the function we're testing
+      function square(x) {
+        return x * x;
+      }
+
+      // firstly
+      const result0 = square(2);
+      console.log(result0);
+
+      // automate
+      const valuetotest = 2;
+      const result = square(valuetotest);
+      // const expected = valuetotest * valuetotest;
+      const expected = 12;
+      const actual = result;
+      const errormessage = "Wrong answer";
+      if (result !== expected) {
+        console.error(
+          `Failure: ${errormessage} expected square(${valuetotest}) to equal ${expected} but got ${actual} instead.`
+        );
+      }
+
+      // reusablise
+      function equal0(actual, expected) {
+        if (actual === expected) {
+          console.info(`Pass: expected ${expected} and received ${actual}`);
+        } else {
+          console.error(`Failure: expected ${expected} and received ${actual}`);
+        }
+      }
+
+      const result1 = square(2);
+      const expected1 = 4;
+      equal0(result1, expected1);
+
+      const result2 = square(3.5);
+      const expected2 = 45;
+      equal0(result2, expected2);
+
+      // separating(andcallingback)
+      const testName = "Correct integer squaring";
+
+      function test(name, testFunction) {
+        console.group(name);
+        testFunction();
+        console.groupEnd();
+      }
+
+      test(testName, () => {
+        const result3 = square(2);
+        const expected3 = 4;
+        equal(result3, expected3);
+      });
+
+      test(testName, () => {
+        const result4 = square(3.5);
+        const expected4 = 12.25;
+        equal(result4, expected4);
+      });
+
+      // customise
+      function equal(actual, expected, message) {
+        if (actual === expected) {
+          const defaultMessage = `Expected ${expected} and received ${actual}`;
+          console.info(`Pass: (${message || defaultMessage})`);
+        } else {
+          const defaultMessage = `Expected ${expected} but received ${actual} instead`;
+          console.error(`Failure: (${message || defaultMessage})`);
+        }
+      }
+
+      function notEqual(actual, expected, message) {
+        if (actual !== expected) {
+          const defaultMessage = `${expected} is different to ${actual}`;
+          console.info(`Pass: ${message || defaultMessage}`);
+        }
+      }
+
+      test(testName, () => {
+        const result = square(valuetotest);
+        const expected = 4;
+        equal(result, expected, `square(2) should return 4`);
+      });
+    </script>
+  </body>
+</html>
