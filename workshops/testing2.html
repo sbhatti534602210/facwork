@@ -4,11 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Learn Unit Testing</title>
+    <link href="../css/mainstyle.css" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="../media/workspace.png" />
   </head>
   <body>
-    <h1>Open the console</h1>
+    <header class="headercontainer"><h1>Open the console</h1></header>
+    <section class="center">
+      <p>
+        The code to be tested is in testing2.js, the tests for the code are in
+        testing2.test.js and the additional test helper functions set up as
+        equal or notequal (based on expected and actual) are in the
+        test-helpers.js file that is used for the remaining test exercises.
+      </p>
+      <p>
+        Next is integration testing.<br />
+        <a href="testing3.html">Integration testing</a>.
+      </p>
+    </section>
+
     <!-- Include the `test` function we wrote in the previous workshop -->
-    <script src="test-helpers2.js"></script>
+    <script src="test-helpers.js"></script>
     <!-- Include our actual code -->
     <script src="testing2.js"></script>
     <!-- Include the tests for our code (it's best to keep these separate) -->

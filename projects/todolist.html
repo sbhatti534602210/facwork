@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create a to-do list and test</title>
+    <link href="../css/mainstyle.css" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="../media/workspace.png" />
+    <script
+      src="https://kit.fontawesome.com/f9ad104398.js"
+      crossorigin="anonymous"
+    ></script>
+ 
+  </head>
+  <body>
+    <header class="headercontainer">
+      <h1>Learning about testing by making a to do list</h1>
+      <nav>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../workshops/workshop.html">Exercises</a></li>
+
+          <li><a href="../projects/projectsgallery.html">Projects</a></li>
+          <li><a href="../sb-challenges/codechallenges.html">Challenges</a></li>
+          <li><a href="../javascript30/js30exercises.html">JavaScript30</a></li>
+        </ul>
+      </nav>
+    </header>
+    
+<section class="center">
+  <h2>All the things I need to do</h2>
+  <p>The basic to do list creation, completion and deletion in order to test testing,</p>
+    <input type="text" id="todoInput" placeholder="Add your task"></input>
+
+    <button type="button" id="todoAdder">Add</button>
+
+    <h3>To do list</h3>
+    <ul id="todoList">
+    </ul>
+    <h3>Completed list</h3>
+    <ul id="doneList">
+    </ul>
+  </section>
+  <script src="../js/todo.js">
+  </script>
+  </body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Understanding JavaScript's Capture</title>
+  </head>
+  <body class="bod">
+    <p>body</p>
+    <div class="one">
+      <p>outside</p>
+      <div class="two">
+        <p>middle</p>
+        <div class="three"><p>inside</p></div>
+      </div>
+    </div>
+
+    <style>
+      html {
+        box-sizing: border-box;
+      }
+
+      *,
+      *:before,
+      *:after {
+        box-sizing: inherit;
+      }
+
+      div {
+        width: 100%;
+        padding: 100px;
+      }
+
+      .one {
+        background: thistle;
+      }
+
+      .two {
+        background: mistyrose;
+      }
+
+      .three {
+        background: coral;
+      }
+    </style>
+
+    <button>button</button>
+    <script>
+      const divs = document.querySelectorAll("div");
+      const button = document.querySelector("button");
+
+      function logText(e) {
+        console.log(this.classList.value);
+        // e.stopPropagation();
+        // only shows the inner
+      }
+
+      document.body.addEventListener("click", logText);
+
+      // divs.forEach((div) => div.addEventListener("click", logText));
+
+      divs.forEach((div) =>
+        div.addEventListener("click", logText, {
+          // capture: false,
+          capture: true,
+          once: true,
+        })
+      );
+      // button.addEventListener("click", () => {
+      //   console.log("Button clicked");
+      // }); // can click many times and something, i.e console log, can happen. so to only use once
+
+      button.addEventListener(
+        "click",
+        () => {
+          console.log("Button clicked");
+        },
+        {
+          once: true,
+        }
+      );
+    </script>
+  </body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Follow Along Nav</title>
+    <link rel="stylesheet" href="stylefn.css" />
+  </head>
+  <body>
+    <nav>
+      <ul class="menu">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="js30exercises.html">Exercises</a></li>
+        <li><a href="../projects/projectsgallery.html">Projects</a></li>
+        <!-- <li><a href="">Menu four</a></li>
+        <li><a href="">Menu five</a></li> -->
+      </ul>
+    </nav>
+
+    <div class="wrapper">
+      <h2>Empty Words</h2>
+      <p>by Zaffar Kunial</p>
+      <p>
+        The text is from Zaffar's poem, I am using it instead of filler text.
+      </p>
+      <p>
+        <a href="https://www.poetryfoundation.org/poets/zaffar-kunial"
+          >More about Zaffar Kunial at the Poetry Foundation website</a
+        >.
+      </p>
+      <p>
+        Meaning “homeland” — <a href="">mulk</a>
+        (in Kashmir) — exactly how my son demands milk.
+        <!-- Lorem ipsum dolor sit amet, <a href="">consectetur</a> adipisicing elit.
+        Est <a href="">explicabo</a> unde natus necessitatibus esse obcaecati
+        distinctio, aut itaque, qui vitae! -->
+      </p>
+      <p>
+        Full-rhyme with <a href="">Jhelum</a>, the river nearest his home —  my
+        father’s “realm.”
+        <!-- Aspernatur sapiente quae sint <a href="">soluta</a> modi, atque
+        praesentium laborum pariatur earum <a href="">quaerat</a> cupiditate
+        consequuntur facilis ullam dignissimos, aperiam quam veniam. -->
+      </p>
+      <p>
+        You can’t put a leaf between <a href="">written</a> and
+        <a href="">oral</a>; that first A, or <a href="">alif</a>.
+        <!-- Cum ipsam quod, incidunt sit ex <a href="">tempore</a> placeat maxime
+        <a href="">corrupti</a> possimus <a href="">veritatis</a> ipsum fugit
+        recusandae est doloremque? Hic, <a href="">quibusdam</a>, nulla. -->
+      </p>
+      <p>
+        Letters. West to east Mum’s hand would write; Dad’s script goes east to
+        west. Received.
+        <!-- Esse quibusdam, ad, ducimus cupiditate <a href="">nulla</a>, quae magni
+        odit <a href="">totam</a> ut consequatur eveniet sunt quam provident
+        sapiente dicta neque quod. -->
+      </p>
+      <p>
+        Invader, to some —  neither here, nor there, with me —  our
+        rhododendron.
+        <!-- Aliquam <a href="">dicta</a> sequi culpa fugiat
+        <a href="">consequuntur</a> pariatur optio ad minima, maxime
+        <a href="">odio</a>, distinctio magni impedit tempore enim repellendus
+        <a href="">repudiandae</a> quas! -->
+      </p>
+      <p>
+        Where migrating geese pause to sleep — somewhere, halfway is this
+        pillow’s crease.
+      </p>
+      <p>
+        Now we separate for the first time, on our walk, at the kissing gate.
+      </p>
+      <p>
+        Old English “Deor” —  an exile’s lament, the past’s dark, half-opened
+        door.
+      </p>
+      <p>
+        Yes, I know. <a href="">Empty</a>. But there’s just something between
+        the <a href="">p</a> and the <a href="">t</a>.
+      </p>
+      <p>
+        At home in Grasmere —  thin mountain paths have me back, a boy in
+        Kashmir.
+      </p>
+    </div>
+
+    <script>
+      // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
+
+      const triggers = document.querySelectorAll("a");
+      const highlight = document.createElement("span");
+      highlight.classList.add("highlight");
+      document.body.append(highlight);
+
+      function highlightLink() {
+        // console.log("Highlight link: ", this);
+        const linkCoords = this.getBoundingClientRect();
+        console.log(linkCoords);
+        // highlight.style.width = `${linkCoords.width}px`;
+        // highlight.style.height = `${linkCoords.height}px`;
+        // highlight.style.transform = `translate(${linkCoords.left}px, ${linkCoords.top}px)`;
+
+        //so that it still works when you scroll down
+        const coords = {
+          width: linkCoords.width,
+          height: linkCoords.height,
+          top: linkCoords.top + window.scrollY,
+          left: linkCoords.left + window.scrollX,
+        };
+        highlight.style.width = `${coords.width}px`;
+        highlight.style.height = `${coords.height}px`;
+        highlight.style.transform = `translate(${coords.left}px, ${coords.top}px)`;
+      }
+
+      // use the link a
+      triggers.forEach((a) => a.addEventListener("mouseenter", highlightLink));
+    </script>
+  </body>
+</html>
