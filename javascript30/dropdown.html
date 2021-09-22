@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Follow Along Nav</title>
+  </head>
+  <body>
+    <h2>Drop-down menu</h2>
+    <nav class="top">
+      <div class="dropdownBackground">
+        <span class="arrow"></span>
+        <!-- the arrow is the little notch at the top of the submenu -->
+      </div>
+
+      <ul class="cool">
+        <li>
+          <a href="#">About me</a>
+          <div class="dropdown aboutme">
+            <div class="bio">
+              <img src="../media/50758583586_32091d2fda_s.jpg" />
+              <p>
+                I am learning JavaScript and using various online resources,
+                including the Wes Bos JavaScript30 course.
+              </p>
+            </div>
+          </div>
+        </li>
+        <li>
+          <a href="#">JS30 exercises</a>
+          <ul class="dropdown exercises">
+            <li>
+              <span class="code">Drum</span>
+              <a href="drumkit.html">Drum kit</a>
+            </li>
+            <li>
+              <span class="code">Clock</span>
+              <a href="clock.html">CSS and JS Clock</a>
+            </li>
+            <li>
+              <span class="code">Flex</span>
+              <a href="flexpanel.html">Flex panel image gallery</a>
+            </li>
+            <li>
+              <span class="code">Canvas</span>
+              <a href="canvas.html">Canvas for scribbling</a>
+            </li>
+            <li>
+              <span class="code">Checklist</span>
+              <a href="checkbox.html">Checklist</a>
+            </li>
+            <li>
+              <span class="code">Video</span>
+              <a href="videoplayer.html">Video player</a>
+            </li>
+            <li>
+              <span class="code">Scrollin</span>
+              <a href="scroll.html">Scroll in images</a>
+            </li>
+            <li>
+              <span class="code">Webcam</span>
+              <a href="webcam.html">Webcam with image effects</a>
+            </li>
+            <li>
+              <span class="code">Speech</span>
+              <a href="speech.html">Speech recognition</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#">Other Links</a>
+          <ul class="dropdown extralinks">
+            <li>
+              <a class="button" href="http://twitter.com/codering2">Twitter</a>
+            </li>
+            <li>
+              <a class="button" href="https://github.com/sbhatti534602210"
+                >Github</a
+              >
+            </li>
+            <li>
+              <a
+                class="button"
+                href="https://sbhatti534602210.github.io/facwork/"
+                >FAC work</a
+              >
+            </li>
+            <li>
+              <a
+                class="button"
+                href="https://sbhatti534602210.github.io/homeupcycled/"
+                >Home Upcycled</a
+              >
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <section>
+      <p>Open the console/developer tools to view function details.</p>
+    </section>
+    <style>
+      html {
+        box-sizing: border-box;
+        font-family: "Arial Rounded MT Bold", "Helvetica Rounded", Arial,
+          sans-serif;
+      }
+
+      *,
+      *:before,
+      *:after {
+        box-sizing: inherit;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: linear-gradient(
+            45deg,
+            hsla(340, 100%, 55%, 1) 0%,
+            hsla(340, 100%, 55%, 0) 70%
+          ),
+          linear-gradient(
+            135deg,
+            hsla(225, 95%, 50%, 1) 10%,
+            hsla(225, 95%, 50%, 0) 80%
+          ),
+          linear-gradient(
+            225deg,
+            hsla(140, 90%, 50%, 1) 10%,
+            hsla(140, 90%, 50%, 0) 80%
+          ),
+          linear-gradient(
+            315deg,
+            hsla(35, 95%, 55%, 1) 100%,
+            hsla(35, 95%, 55%, 0) 70%
+          );
+      }
+
+      h2 {
+        margin-top: 0;
+        padding-top: 0.8em;
+      }
+
+      nav {
+        position: relative;
+        perspective: 600px;
+      }
+
+      .cool > li > a {
+        color: yellow;
+        text-decoration: none;
+        font-size: 20px;
+        background: rgba(0, 0, 0, 0.2);
+        padding: 10px 20px;
+        display: inline-block;
+        margin: 20px;
+        border-radius: 5px;
+      }
+
+      nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+      }
+
+      .cool > li {
+        position: relative;
+        display: flex;
+        justify-content: center;
+      }
+
+      .dropdown {
+        opacity: 0;
+        position: absolute;
+        overflow: hidden;
+        padding: 20px;
+        top: -20px;
+        border-radius: 2px;
+        transition: all 0.5s;
+        transform: translateY(100px);
+        will-change: opacity;
+        display: none;
+      }
+
+      .trigger-enter .dropdown {
+        display: block;
+      }
+
+      .trigger-enter-active .dropdown {
+        opacity: 1;
+      }
+
+      .dropdownBackground {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        background: #fff;
+        border-radius: 4px;
+        box-shadow: 0 50px 100px rgba(50, 50, 93, 0.1),
+          0 15px 35px rgba(50, 50, 93, 0.15), 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s, opacity 0.1s, transform 0.2s;
+        transform-origin: 50% 0;
+        display: flex;
+        justify-content: center;
+        opacity: 0;
+      }
+
+      .dropdownBackground.open {
+        opacity: 1;
+      }
+
+      .arrow {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        display: block;
+        background: white;
+        transform: translateY(-50%) rotate(45deg);
+      }
+
+      .bio {
+        min-width: 500px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        line-height: 1.7;
+      }
+
+      .bio img {
+        float: left;
+        margin-right: 20px;
+      }
+
+      .courses {
+        min-width: 300px;
+      }
+
+      .courses li {
+        padding: 10px 0;
+        display: block;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+      }
+
+      .dropdown a {
+        text-decoration: none;
+        color: #ffc600;
+      }
+
+      a.button {
+        background: black;
+        display: block;
+        padding: 10px;
+        color: white;
+        margin-bottom: 10px;
+      }
+
+      /* Matches Twitter, TWITTER, twitter, tWitter, TWiTTeR... */
+      .button[href*="twitter"] {
+        background: #019fe9;
+      }
+      .button[href*="github"] {
+        background: #3b5998;
+      }
+      .button[href*="facwork"] {
+        background: #3c6e71;
+      }
+      .button[href*="homeupcycled"] {
+        background: #8c1308;
+      }
+    </style>
+
+    <script>
+      // triggers
+      const triggers = document.querySelectorAll(".cool > li");
+      const background = document.querySelector(".dropdownBackground");
+      const nav = document.querySelector(".top");
+
+      // listeners for mouse enter and mouse leave
+
+      function handleEnter() {
+        console.log("mouse enters.");
+        //grab "this". "this" is the list item of the menu.
+        this.classList.add("trigger-enter");
+        // setTimeout(() => this.classList.add("trigger-enter-active"), 150);
+        setTimeout(
+          () =>
+            this.classList.contains("trigger-enter") &&
+            this.classList.add("trigger-enter-active"),
+          150
+        );
+        background.classList.add("open"); //make sure to remove it when you leave
+        const dropdown = this.querySelector(".dropdown");
+        console.log(dropdown);
+        const dropdownCoords = dropdown.getBoundingClientRect();
+        console.log(dropdownCoords);
+        // and navigation coordinates
+        const navCoords = nav.getBoundingClientRect();
+
+        const coords = {
+          height: dropdownCoords.height,
+          width: dropdownCoords.width,
+          top: dropdownCoords.top - navCoords.top,
+          left: dropdownCoords.left - navCoords.left,
+        };
+
+        background.style.setProperty("width", `${coords.width}px`);
+        background.style.setProperty("height", `${coords.height}px`);
+        // transform property
+        background.style.setProperty(
+          "transform",
+          `translate(${coords.left}px, ${coords.top}px)`
+        );
+      }
+
+      function handleLeave() {
+        console.log("mouse leaves.");
+        this.classList.remove("trigger-enter", "trigger-enter-active");
+        background.classList.remove("open");
+      }
+
+      // call the associated triggers
+      triggers.forEach((trigger) =>
+        trigger.addEventListener("mouseenter", handleEnter)
+      );
+      triggers.forEach((trigger) =>
+        trigger.addEventListener("mouseleave", handleLeave)
+      );
+    </script>
+  </body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Video Speed Selector</title>
+    <link rel="stylesheet" href="stylevs.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <video
+        class="flex"
+        width="765"
+        height="430"
+        src="http://clips.vorwaerts-gmbh.de/VfE_html5.mp4"
+        loop
+        controls
+      ></video>
+      <div class="speed">
+        <div class="speed-bar">1×</div>
+      </div>
+    </div>
+
+    <script>
+      // video controls
+      const speed = document.querySelector(".speed");
+      const bar = speed.querySelector(".speed-bar");
+      const video = document.querySelector(".flex");
+
+      speed.addEventListener("mousemove", function (e) {
+        console.log(e);
+        const y = e.pageY - this.offsetTop;
+        console.log(y);
+        const percent = y / this.offsetHeight;
+        console.log(percent);
+        const min = 0.4;
+        const max = 4;
+        const height = Math.round(percent * 100) + "%";
+        console.log(height);
+
+        // update the slider and relate the coordinate with the slider value
+        const playbackRate = percent * (max - min) + min;
+        bar.style.height = height;
+        bar.textContent = playbackRate.toFixed(2) + "×";
+        console.log(playbackRate);
+        video.playbackRate = playbackRate;
+
+        // can also separate into two functions but this also works
+      });
+    </script>
+  </body>
+</html>
