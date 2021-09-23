@@ -1,86 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Scoped CSS Variables and JS</title>
-</head>
-<body>
-  <h2>Update CSS Variables with <span class='hl'>JS</span></h2>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Scoped CSS Variables and JS</title>
+  </head>
+  <body>
+    <p class="homelink">
+      <a href="../index.html">Home</a> |
+      <a href="js30exercises.html">JS30 exercises</a>
+    </p>
 
-  <div class="controls">
-    <!-- the names of the variables are used here, i.e. base, spacing, blur -->
-    <label for="spacing">Spacing:</label>
-    <input id="spacing" type="range" name="spacing" min="10" max="200" value="10" data-sizing="px">
-    <!-- data attribute created by adding a data- suffix -->
+    <h2>Update CSS Variables with <span class="hl">JS</span></h2>
 
-    <label for="blur">Blur:</label>
-    <input id="blur" type="range" name="blur" min="0" max="25" value="10" data-sizing="px">
+    <div class="controls">
+      <!-- the names of the variables are used here, i.e. base, spacing, blur -->
+      <label for="spacing">Spacing:</label>
+      <input
+        id="spacing"
+        type="range"
+        name="spacing"
+        min="10"
+        max="200"
+        value="10"
+        data-sizing="px"
+      />
+      <!-- data attribute created by adding a data- suffix -->
 
-    <label for="base">Base Color</label>
-    <input id="base" type="color" name="base" value="#ffc600">
-  </div>
+      <label for="blur">Blur:</label>
+      <input
+        id="blur"
+        type="range"
+        name="blur"
+        min="0"
+        max="25"
+        value="10"
+        data-sizing="px"
+      />
 
-  <img src="../media/49450821247_173627fde3_o.jpg">
+      <label for="base">Base Color</label>
+      <input id="base" type="color" name="base" value="#ffc600" />
+    </div>
 
-  <style>
-    /* need to set the variables on an element, here it will be done at the root to declare them and then use them in the other elements and the js*/
+    <img src="../media/49450821247_173627fde3_o.jpg" />
 
-    :root {
-      --base: #ffc600;
-      --spacing: 10px;
-      --blur: 10px;
-        
-    }
+    <style>
+      /* need to set the variables on an element, here it will be done at the root to declare them and then use them in the other elements and the js*/
 
-    img {
-      padding: var(--spacing);
-      background: var(--base);
-      filter: blur(var(--blur));
-    }
+      :root {
+        --base: #ffc600;
+        --spacing: 10px;
+        --blur: 10px;
+      }
 
-    .h1 {
-      color: var(--base);
-    }
+      img {
+        padding: var(--spacing);
+        background: var(--base);
+        filter: blur(var(--blur));
+      }
 
-    /*
+      .h1 {
+        color: var(--base);
+      }
+
+      /*
       misc styles, nothing to do with CSS variables
     */
 
-    body {
-      text-align: center;
-      background: #193549;
-      color: white;
-      font-family: 'helvetica neue', sans-serif;
-      font-weight: 100;
-      font-size: 50px;
-    }
+      body {
+        text-align: center;
+        background: #193549;
+        color: white;
+        font-family: "helvetica neue", sans-serif;
+        font-weight: 100;
+        font-size: 50px;
+      }
 
-    .controls {
-      margin-bottom: 50px;
-    }
+      .controls {
+        margin-bottom: 50px;
+      }
 
-    input {
-      width: 100px;
-    }
+      input {
+        width: 100px;
+      }
+      .homelink {
+        margin: 2rem;
+        font-size: 2rem;
+        color: white;
+      }
+      .homelink :visited {
+        font-size: 1.2rem;
+        color: white;
+      }
+    </style>
 
-  </style>
+    <script>
+      // javascript to update variables
+      const inputs = document.querySelectorAll(".controls input");
 
-  <script>
-// javascript to update variables
-    const inputs = document.querySelectorAll(".controls input");
-    
-    function handleUpdate() {
-      // console.log(this.value);
-      const suffix = this.dataset.sizing || ""; // the sizing or nothing as there is no suffix for the base color control
-      // console.log(this.name);
-      document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
-    }
+      function handleUpdate() {
+        // console.log(this.value);
+        const suffix = this.dataset.sizing || ""; // the sizing or nothing as there is no suffix for the base color control
+        // console.log(this.name);
+        document.documentElement.style.setProperty(
+          `--${this.name}`,
+          this.value + suffix
+        );
+      }
 
-    // look out for changing the controls and then call the handleUpdate
-    inputs.forEach(input => input.addEventListener("change", handleUpdate));
-    inputs.forEach(input => input.addEventListener("mousemove", handleUpdate));
-
-  </script>
-
-</body>
+      // look out for changing the controls and then call the handleUpdate
+      inputs.forEach((input) => input.addEventListener("change", handleUpdate));
+      inputs.forEach((input) =>
+        input.addEventListener("mousemove", handleUpdate)
+      );
+    </script>
+  </body>
 </html>
